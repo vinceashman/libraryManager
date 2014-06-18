@@ -1,0 +1,7 @@
+Testing Methodology
+
+first: create a main.cpp that incorporates all methods/classes
+
+	this is mostly done at this point. 
+
+2: 
