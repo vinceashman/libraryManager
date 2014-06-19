@@ -14,6 +14,10 @@
 //dont know if this is looked down on but this is how i like to do things. 
 using namespace std;
 
+
+
+
+
 //not going to handle arguments at the cli at this time. 
 int main(){
 	//declaration of variables
@@ -24,11 +28,28 @@ int main(){
 	//our file handler objects. the text files are going to be hard coded. 
 	ifStream userFile, bookFile;
 	//youll want to inplement some error checking here.
-	userFile.open("userlist.txt");
-	bookFile.open("booklist.txt");
+	// userFile.open("userlist.txt");
+	// bookFile.open("booklist.txt");
+	try
+	{
+		userfile.open("userlist.txt");
+	}
+	catch (int e)
+	{
+		cout << "Could not open user file.\n"; 
+		return 0;
+	}
+	try
+	{
+		bookFile.open("booklist.txt");
+	}
+	catch (int e)
+	{
+		cout << "Could not open book file.\n"; 
+		return 0;
+	}
 	
-	//date object. most likely will only require the date as in mm/yy
-	Date theDate(parameter1);
+	Date theDate;
 	
 	//instantiate ui object. most likely it would take 3 parameters. a pointer to the 2 vectors and a pointer to the date object. 
 	UserInterface ui(parameter1, parameter2, parameter3);

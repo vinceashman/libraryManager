@@ -12,20 +12,21 @@ class Book
 		String type;
 		bool checkedIn;
 		bool child;
-		//We need a variable for when book was checked out
 		Date checkedOut;
 		int days;
 		String user;
 		
 
 	public:
-		//constructor
 		Book(String ti, String ty, bool c, bool ch)
 		{
 			title = ti;
 			type = ty;
 			checkedIn = c;
 			child = ch;
+			checkedOut = NULL;
+			days = 0;
+			user = library;
 
 			switch (type)
 			{
@@ -51,10 +52,18 @@ class Book
 			return checkedIn;
 		}
 
-		//can't we calculate if the date is overdue outside of this class by using this function?
+		//To calculate the due date, we need to create a copy of the time the book was checked out, then advance the date for how many days the book is allowed to be gone (The days variable)
 		Date CalcDueDate()
 		{
-			//for loop to advance the date
+			Date dueDate;
+			dueDate.day = checkedOut.day;
+			dueDate.month = checkedOut.month;
+			dueDate.year = checkedOut.year;
+
+			for (int i = 0; i < days; i++)
+			{
+				dueDate.AdvanceDate();
+			}
 
 		}
 
