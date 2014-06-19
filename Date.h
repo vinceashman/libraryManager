@@ -1,4 +1,3 @@
-j
 #include<iostream>
 #include<fstream>
 #include<stdlib.h>
@@ -24,8 +23,40 @@ class Date
 
 		void AdvanceDate()
 		{
-			//Since most months have 31 days, you can make that the default to carry over to the first of the next month, but then put conditions when it's Febuary and the 29th, etc for other months that don't have 31 days.
-			day++;
+			if (month+1 == 2)
+			{
+				if (day == 28)
+				{
+					day = 1;
+					month++;
+				}
+			}
+			if (month+1 == 4 || month+1 == 6 || month+1 == 9 || month+1 == 11)
+			{
+				if (day == 30)
+				{
+					day = 1;
+					month++;
+				}
+			}
+			else if (day == 31)
+			{
+				if (month == 12)
+				{
+					year++;
+					month = 1;
+					day = 1;
+				}
+				else 
+				{
+					day = 1;
+					month++;
+				}
+			}
+			else 
+			{
+				day++;
+			}
 		}
 
 };
