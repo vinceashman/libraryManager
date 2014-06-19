@@ -25,7 +25,6 @@ class Book
 			checkedIn = c;
 			child = ch;
 			checkedOut = NULL;
-			days = 0;
 			user = library;
 
 			switch (type)
@@ -64,7 +63,8 @@ class Book
 			{
 				dueDate.AdvanceDate();
 			}
-
+			
+			return dueDate;
 		}
 
 		String getPerson()
