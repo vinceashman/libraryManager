@@ -1,0 +1,39 @@
+Testing Methodology
+
+first: create a main.cpp that incorporates all methods/classes
+
+	this is mostly done at this point. 
+
+2: create a full set of test data. the data will need the following:
+	a. at least 2 users of each type
+	b. at least 2 books/media items of each type
+	c. at elast 1 user of each type with at least 1 book checked out
+	d. at least 1 user of each type with at least 2 books checked out
+	e. at least 1 user of each type with at least 1 book overdue
+	f. at least 1 user with more than 1 book over due
+	g. at least 1 user with a book overdue and another one not overdue. 
+3. run the tests on each function
+	a. start the program and verify that it is reading the text files containing the database properly. 
+	b. make sure the program outputs the menu properly by calling the right functin from the UI class
+	c. make sure the class reads the input properly. 
+	d. test each option of the input for each user if applicable
+		1. show the user list
+		2. show the book list
+		3. show the list of books checked out
+		4. show the list of available books
+		5. show a specific users books (for each user)
+		6. show a list of all overdue books
+		7. check out an available book
+		8. check a book back in thats over due
+		9. check a book back in that was overdue
+		10. advance the date
+		11. quit. 
+	e. make sure that upon quitting, the program properly writes the newly modified data back to the text files
+	f. REPEAT ALL ABOVE TESTS 3X
+4. As the methods are not all currently tested, placeholders can be used. Typically that will be replacing the method with { cout << "running method x which is not yet coded" << endl; return 0; }
+5. AS time permits, additional data sets will be created with the following parameters
+	a. 300 users of each type, simulating the actual possible size of a small town library
+	b. 2000 media items of varying types. 
+	c. randomized booklists for each user. 
+
+
