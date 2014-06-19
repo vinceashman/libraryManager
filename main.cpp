@@ -6,9 +6,9 @@
 #include <fstream>
 #include <iostream>
 #include <vector>
-#include "book.h"
+#include "Book.h"
 #include "user.h"
-#include "date.h"
+#include "Date.h"
 #include "userInterface.h"
 
 //dont know if this is looked down on but this is how i like to do things. 
