@@ -13,7 +13,7 @@ first: create a main.cpp that incorporates all methods/classes
 	f. at least 1 user with more than 1 book over due
 	g. at least 1 user with a book overdue and another one not overdue. 
 3. run the tests on each function
-	a. start the program and verify that it is reading the text files containing the database properly. 
+	a. start the program and verify that it is reading the text file containing the database properly. 
 	b. make sure the program outputs the menu properly by calling the right functin from the UI class
 	c. make sure the class reads the input properly. 
 	d. test each option of the input for each user if applicable
@@ -32,8 +32,8 @@ first: create a main.cpp that incorporates all methods/classes
 	f. REPEAT ALL ABOVE TESTS 3X
 4. As the methods are not all currently tested, placeholders can be used. Typically that will be replacing the method with { cout << "running method x which is not yet coded" << endl; return 0; }
 5. AS time permits, additional data sets will be created with the following parameters
-	a. 300 users of each type, simulating the actual possible size of a small town library
-	b. 2000 media items of varying types. 
-	c. randomized booklists for each user. 
+	a. 2000 media items of varying types. 
+	b. randomized booklists for each user. 
 
+6. As the code overall changes, tests will be refactored to reflect this. 
 
