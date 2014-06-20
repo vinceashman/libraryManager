@@ -28,56 +28,40 @@ class Book
 			type = ty;
 			user = u;
 
-			if (d == "NA")
+			if (user == "library")
 			{
 				checkedIn = true;
 			}
 			else
 			{
 				checkedIn = false;
-				vector s = split(d, "/");
-				s[0] = day;
-				s[1] = month;
-				s[3] = year;
+				day = atio(d.substr(0,2));
+				month = atio(d.subtr(2,2));
+				year = atio(d.subtr(4, 4));
 			}
 
 
 			child = false;
-			switch (type)
+
+			if (type == "AB")
 			{
-				case "AB":
-					days = 14;
-					break;
-				case "CB":
+				days = 14;
+			}
+			else if (type == "CB")
+			{
 					child = true;
 					days = 7;
-					break;
-				case "DVD":
-					days = 2;
-					break;
-				case "VHS":
-					days = 3;
-					break;
 			}
-
-		}
-
-
-		vector<string> &split(const string &s, char delimiter, vector<string> &elements) 
-		{
-			stringstream ss(s);
-			string item;
-			while (getline(ss, item, delimiter)) 
+			else if (type == "DVD")
 			{
-				elements.push_back(item);
+				days = 2;
 			}
-			return elements;
-		}
-		vector<string> split(const string &s, char delimiter) 
-		{
-			vector<string> elements;
-			split(s, delimimter, elements);
-			return elements;
+			else if (type == "VHS")
+			{
+				days = 3;
+			}
+
+
 		}
 
 
