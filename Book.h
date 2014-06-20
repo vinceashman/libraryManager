@@ -36,10 +36,6 @@ class Book
 			else
 			{
 				checkedIn = false;
-				// int temp;
-				// string tempStr;
-				// tempStr = d.substr(0,2);
-				// temp = atoi(tempStr.c_str());
 
 				checkedOut.setDay(atoi(d.substr(0,2).c_str()));
 				checkedOut.setMonth(atoi(d.substr(2,2).c_str()));

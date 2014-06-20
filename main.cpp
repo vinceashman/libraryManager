@@ -57,9 +57,6 @@ int main(){
 	//read in the data from the booklist.txt file
 	while(!bookFile.eof()){
 		string title, type, dateCheckedOut, user;
-		//going to assume books are stored as follows:
-		//one book per line
-		// bookTitle mediaType dueDate
 		bookFile >> title;
 		bookFile >> type;
 		bookFile >> dateCheckedOut;
