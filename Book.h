@@ -1,6 +1,9 @@
 #include<iostream>
 #include<fstream>
 #include<stdlib.h>
+#include<vector>
+#include<string>
+#include<sstring>
 
 using namespace std;
 
@@ -8,42 +11,75 @@ using namespace std;
 class Book
 {
 	private:
-		String title;
-		String type;
+		string title;
+		string type;
+		Date checkedOut;
+		string user;
+
 		bool checkedIn;
 		bool child;
-		Date checkedOut;
 		int days;
-		String user;
 		
 
 	public:
-		Book(String ti, String ty, bool c, bool ch)
+		Book(string ti, string ty, string d, string u)
 		{
 			title = ti;
 			type = ty;
-			checkedIn = c;
-			child = ch;
-			checkedOut = NULL;
-			user = library;
+			user = u;
 
+			if (d == "NA")
+			{
+				checkedIn = true;
+			}
+			else
+			{
+				checkedIn = false;
+				vector s = split(d, "/");
+				s[0] = day;
+				s[1] = month;
+				s[3] = year;
+			}
+
+
+			child = false;
 			switch (type)
 			{
-				case "adult":
+				case "AB":
 					days = 14;
 					break;
-				case "children":
+				case "CB":
+					child = true;
 					days = 7;
 					break;
-				case "dvd":
+				case "DVD":
 					days = 2;
 					break;
-				case "videotape":
+				case "VHS":
 					days = 3;
 					break;
 			}
 
 		}
+
+
+		vector<string> &split(const string &s, char delimiter, vector<string> &elements) 
+		{
+			stringstream ss(s);
+			string item;
+			while (getline(ss, item, delimiter)) 
+			{
+				elements.push_back(item);
+			}
+			return elements;
+		}
+		vector<string> split(const string &s, char delimiter) 
+		{
+			vector<string> elements;
+			split(s, delimimter, elements);
+			return elements;
+		}
+
 
 		//returns true if the book (or media) is avialable to check out
 		bool IsAvailable()
@@ -67,7 +103,7 @@ class Book
 			return dueDate;
 		}
 
-		String getPerson()
+		string getPerson()
 		{
 			return person;
 		}

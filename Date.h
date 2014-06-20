@@ -13,7 +13,6 @@ class Date
 
 
 	public:
-		//Since it doesn't specify, I think we can just start the date whenever we'd like. Easiest was just 1/1/14. Also, do you think we need to handle changing the year? 
 		Date()
 		{
 			day = 1;
@@ -57,6 +56,19 @@ class Date
 			{
 				day++;
 			}
+		}
+
+		void setDay(int d)
+		{
+			day = d;
+		}
+		void setMonth(int m)
+		{
+			month = m;
+		}
+		void setYear(int y)
+		{
+			year = y;
 		}
 
 };
