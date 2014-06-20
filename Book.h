@@ -89,9 +89,24 @@ class Book
 			return dueDate;
 		}
 
+		string getTitle()
+		{
+			return title;
+		}
+
+		string getType()
+		{
+			return type;
+		}
+
 		string getUser()
 		{
 			return user;
+		}
+
+		bool IsChildrensBook()
+		{
+			return child;
 		}
 		
 };
