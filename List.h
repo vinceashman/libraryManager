@@ -16,6 +16,8 @@ public:
 	void ListOverdue(vector<Book*> books, int currentBook, Date currentDate);
 	void BooksCheckedOut(vector<Book*> books, string user);
 };
+List::List()
+{}
 
 void List::ListAvailable(vector<Book*> books, int currentBook)
 {
