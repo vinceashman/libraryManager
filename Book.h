@@ -18,7 +18,7 @@ class Book
 		string user;
 
 		bool checkedIn;
-		bool child;
+		// bool child;
 		int days;
 		
 
@@ -43,7 +43,7 @@ class Book
 			}
 
 
-			child = false;
+			// child = false;
 
 			if (type == "AB")
 			{
@@ -51,7 +51,7 @@ class Book
 			}
 			else if (type == "CB")
 			{
-					child = true;
+					// child = true;
 					days = 7;
 			}
 			else if (type == "DVD")
@@ -104,9 +104,9 @@ class Book
 			return user;
 		}
 
-		bool IsChildrensBook()
-		{
-			return child;
-		}
+		// bool IsChildrensBook()
+		// {
+		// 	return child;
+		// }
 		
 };
