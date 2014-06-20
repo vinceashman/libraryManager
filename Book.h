@@ -1,9 +1,10 @@
 #include<iostream>
 #include<fstream>
 #include<stdlib.h>
+#include<stdio.h>
 #include<vector>
 #include<string>
-#include<sstring>
+#include "Date.h"
 
 using namespace std;
 
@@ -35,9 +36,14 @@ class Book
 			else
 			{
 				checkedIn = false;
-				day = atio(d.substr(0,2));
-				month = atio(d.subtr(2,2));
-				year = atio(d.subtr(4, 4));
+				// int temp;
+				// string tempStr;
+				// tempStr = d.substr(0,2);
+				// temp = atoi(tempStr.c_str());
+
+				checkedOut.setDay(atoi(d.substr(0,2).c_str()));
+				checkedOut.setMonth(atoi(d.substr(2,2).c_str()));
+				checkedOut.setYear(atoi(d.substr(4, 4).c_str()));
 			}
 
 
@@ -75,9 +81,9 @@ class Book
 		Date CalcDueDate()
 		{
 			Date dueDate;
-			dueDate.day = checkedOut.day;
-			dueDate.month = checkedOut.month;
-			dueDate.year = checkedOut.year;
+			dueDate.setDay(checkedOut.getDay());
+			dueDate.setMonth(checkedOut.getMonth());
+			dueDate.setYear(checkedOut.getYear());
 
 			for (int i = 0; i < days; i++)
 			{
@@ -87,9 +93,9 @@ class Book
 			return dueDate;
 		}
 
-		string getPerson()
+		string getUser()
 		{
-			return person;
+			return user;
 		}
 		
 };

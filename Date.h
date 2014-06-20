@@ -71,4 +71,17 @@ class Date
 			year = y;
 		}
 
+		int getDay()
+		{
+			return day;
+		}
+		int getMonth()
+		{
+			return month;
+		}
+		int getYear()
+		{
+			return year;
+		}
+
 };
