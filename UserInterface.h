@@ -1,17 +1,19 @@
 #ifndef UserInterface_H
 #define UserInterface_H
-
-//#include "book.h"
+#include "List.h"
+#include "book.h"
 #include <vector>
 #include <string>
+//#include "List.h"
+
 using namespace std;
 
 class UserInterface
 {
     public:
-        UserInterface()
+        UserInterface(vector<Book*> books)
          {
-
+            allBooks = books;
          }
         virtual ~UserInterface() {}
 
@@ -31,7 +33,7 @@ class UserInterface
         //allow user to select book to check in
         void CheckIn()
          {
-             std::cout << "\nCheckIn is called" << endl;
+             std::cout << "\nCheckIn is called" << endl;//temp
              //go through the user's book list and print the list of books with
              //a choice for the user to select which book/media to check in.
              //updates the book list to include the book to show that its available.
@@ -64,7 +66,7 @@ class UserInterface
         }
         void CheckOut()
          {
-            std::cout << "\nCheckOut is called" << endl;
+            std::cout << "\nCheckOut is called" << endl;//temp
             //go through book list and display which books are available to check out
             //user gives choice to what book they want to use.
             //display in groups of 10?
@@ -91,14 +93,63 @@ class UserInterface
          }
          void AdvanceDate()
          {
-              std::cout << "\nAdvanceDate is called" << endl;
+              std::cout << "\nAdvanceDate is called" << endl;//temp
               DisplayMenu();
          }
+        void viewAllBooks()
+        {
+            std::cout << "\nviewAllBooks is called" << endl;//temp
+            std::cout << "\nList of All Media here in Valhalla:"<< endl;
+             int currentCounter = 0;
+             do
+             {
+            std::cout <<"|------------------------------------------|" << endl;
 
+            listOfBooks.AllBooks(allBooks, currentCounter);
+            std::cout <<"|------------------------------------------|" << endl;
+            if(currentCounter > 0)
+            {
+                std::cout <<"\nEnter P for previous page " ;
+            }
+            if(currentCounter <= allBooks.size())
+            {
+                std::cout <<"\nEnter N for next page " ;
+            }
+                std::cout <<"\nEnter * to return to menu" ;
+
+                string choice = promptForInput();
+                if ((choice == "p" || choice == "P" )&& currentCounter > 0)
+                {
+                    currentCounter = 0;
+
+                }
+                else if((choice == "N" || choice == "n") && currentCounter <= allBooks.size())
+                {
+                    currentCounter += 10;
+
+                }
+                else
+                {
+                    std::cout << "\Incorrect entry enter again:";
+                }
+
+             }
+             while(choice != "*");
+
+        }
         void viewOverDueBooks()
         {
             std::cout <<"\nList of Over Due Media here in Valhalla:" << endl;
             std::cout <<"|------------------------------------------|" << endl;
+            for (unsigned int i = 0; i < allBooks.size(); i++)
+            {
+                //check if overdue
+                //if(allBooks[i].overDue() == true)
+                //{
+                  std::cout << "| " << i << allBooks[i] << " |" << endl;
+                //}
+
+            }
             std::cout <<"|------------------------------------------|" << endl;
             DisplayMenu();
         }
@@ -119,8 +170,9 @@ class UserInterface
             std::cout << "\\*------------------*/" << endl;
             std::cout << "\nTo Check In enter 1"<< endl;
             std::cout << "To Check Out enter 2" << endl;
-            std::cout << "To View Over Due books 3" << endl;
-            std::cout << "To Advance Date enter 4" << endl;
+            std::cout << "To View All books 3" << endl;
+            std::cout << "To View Over Due books 4" << endl;
+            std::cout << "To Advance Date enter 5" << endl;
             std::cout << "To Exit enter *" << endl;
             std::cout << "\n\\*------------------*/" << endl;
             //user choice for menu
@@ -141,9 +193,13 @@ class UserInterface
            }
            else if(choice == "3")
            {
-              viewOverDueBooks();
+               viewAllBooks();
            }
            else if(choice == "4")
+           {
+              viewOverDueBooks();
+           }
+           else if(choice == "5")
            {
                AdvanceDate();
            }
@@ -156,15 +212,27 @@ class UserInterface
               cout << "\nIncorrect choice" << endl;
                 DisplayMenu();
            }
-
+            exit();
          }//end of displaymenu function
-
+    void setDate(std::string dateSetter)
+    {
+        currentDate = dateSetter;
+    }
+    bool exit()
+    {
+        return true;
+    }
     private:
             //adding a username variable for now to pass to other objects..
             //unless main handles this..
             std::string userName;
+            //simple placeholders for now
             std::vector<string> bookList; //available books
             std::vector<string> userBookList;
+            std::vector<Book*> allBooks; //all media
+            std::string currentDate;
+            List listOfBooks; //temp?
 };
+
 
 #endif // UI_H
