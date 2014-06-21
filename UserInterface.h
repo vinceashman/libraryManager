@@ -2,6 +2,7 @@
 #define UserInterface_H
 #include "List.h"
 #include "book.h"
+#include "Date.h"
 #include <vector>
 #include <string>
 //#include "List.h"
@@ -11,13 +12,13 @@ using namespace std;
 class UserInterface
 {
     public:
-        UserInterface(vector<Book*> books)
+        UserInterface(vector<Book*> books, Date theDate)
          {
             allBooks = books;
+            currentDate = theDate;
          }
         virtual ~UserInterface() {}
 
-        
         //user checks in book
         //calls menu of books user checked out
         //allow user to select book to check in
@@ -60,16 +61,33 @@ class UserInterface
             //go through book list and display which books are available to check out
             //user gives choice to what book they want to use.
             //display in groups of 10?
-            if(bookList.size() > 0)
+            string user;
+            bool userHasBook = false;
+            string choice;
+            if(allBooks.size() > 0)
+            {
+
+                for(int i = 0; i < allBooks.size(); i++)
+                {
+                    user = allBooks[i]->getUser();
+                    if(user == userName)
+                    {
+                        userHasBook = true;
+                    }
+
+                }
+
+            if(userHasBook == true)
             {
             std::cout <<"\nList of Available Media here in Valhalla:" << endl;
             std::cout <<"|------------------------------------------|" << endl;
-            for(unsigned int i = 0; i < bookList.size(); i++)
-            {
-              std::cout << "| " << i << bookList[i] << " |" << endl;
-            }
+            listOfBooks.BooksCheckedOut(allBooks, userName);
             std::cout <<"|------------------------------------------|" << endl;
-             std::cout <<"Select a item to check out:" << endl;
+            std::cout <<"Select a item to check out:" << endl;
+            //oice = promptForInput();//need to figure out how to get matching data from list
+
+            }
+
              //call option to select media
              //check if the user is adult or child
              //check if the user already reached media.
@@ -79,6 +97,7 @@ class UserInterface
             {
             std::cout <<"\nThere was an Error, going back to main menu" << endl;
             }
+
             DisplayMenu();
          }
          void AdvanceDate()
@@ -90,6 +109,7 @@ class UserInterface
         {
             std::cout << "\nviewAllBooks is called" << endl;//temp
             std::cout << "\nList of All Media here in Valhalla:"<< endl;
+            string choice;
              int currentCounter = 0;
              do
              {
@@ -107,7 +127,7 @@ class UserInterface
             }
                 std::cout <<"\nEnter * to return to menu" ;
 
-                string choice = promptForInput();
+                choice = promptForInput();
                 if ((choice == "p" || choice == "P" )&& currentCounter > 0)
                 {
                     currentCounter = 0;
@@ -204,10 +224,6 @@ class UserInterface
            }
             exit();
          }//end of displaymenu function
-    void setDate(std::string dateSetter)
-    {
-        currentDate = dateSetter;
-    }
     bool exit()
     {
         return true;
@@ -220,7 +236,7 @@ class UserInterface
             std::vector<string> bookList; //available books
             std::vector<string> userBookList;
             std::vector<Book*> allBooks; //all media
-            std::string currentDate;
+            Date currentDate;
             List listOfBooks; //temp?
 };
 
