@@ -1,13 +1,3 @@
-<<<<<<< HEAD
-TheAnarchistCookbook AB 6/30/14 User1
-WarAndPeace AB 7/3/14 User1
-OhThePlacesYoullGo CB 7/2/14 User2
-WhereTheSidewalkEnds CB 7/3/14 User3
-Shrek DVD 6/29/14 User2
-Shrek2 DVD 6/29/14 User2
-Shrek3 VHS 6/28/14 User1
-Shrek4-CheckYourselfBeforeYouShrekYourself VHS 6/23/14
-=======
 TheAnarchistCookbook AB 06302014 User1
 WarAndPeace AB 07032014 User1
 OhThePlacesYoullGo CB 07022014 User2
@@ -16,4 +6,4 @@ Shrek DVD 06292014 User2
 Shrek2 DVD 06292014 User2
 Shrek3 VHS 06282014 User1
 Shrek4CheckYourselfBeforeYouShrekYourself VHS 00000000 library
->>>>>>> 7f6adb03942331264c06fed8e30b52dae3d90b8a
+
