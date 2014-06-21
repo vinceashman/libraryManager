@@ -7,7 +7,6 @@
 #include <iostream>
 #include <vector>
 #include "Book.h"
-#include "user.h"
 #include "Date.h"
 #include "userInterface.h"
 
@@ -56,14 +55,12 @@ int main(){
 	
 	//read in the data from the booklist.txt file
 	while(!bookFile.eof()){
-		string title, type, due;
-		//going to assume books are stored as follows:
-		//one book per line
-		//bookTitle mediaType dueDate
+		string title, type, dateCheckedOut, user;
 		bookFile >> title;
 		bookFile >> type;
-		bookFile >> due;
-		books.push_back(new Book(title, type, due));
+		bookFile >> dateCheckedOut;
+		bookFile >> user;
+		books.push_back(new Book(title, type, dateCheckedOut, user));
 	}
 	
 	//read in userlist.txt

@@ -1,6 +1,10 @@
 #include<iostream>
 #include<fstream>
 #include<stdlib.h>
+#include<stdio.h>
+#include<vector>
+#include<string>
+#include "Date.h"
 
 using namespace std;
 
@@ -8,42 +12,60 @@ using namespace std;
 class Book
 {
 	private:
-		String title;
-		String type;
-		bool checkedIn;
-		bool child;
+		string title;
+		string type;
 		Date checkedOut;
+		string user;
+
+		bool checkedIn;
+		// bool child;
 		int days;
-		String user;
 		
 
 	public:
-		Book(String ti, String ty, bool c, bool ch)
+		Book(string ti, string ty, string d, string u)
 		{
 			title = ti;
 			type = ty;
-			checkedIn = c;
-			child = ch;
-			checkedOut = NULL;
-			user = library;
+			user = u;
 
-			switch (type)
+			if (user == "library")
 			{
-				case "adult":
-					days = 14;
-					break;
-				case "children":
-					days = 7;
-					break;
-				case "dvd":
-					days = 2;
-					break;
-				case "videotape":
-					days = 3;
-					break;
+				checkedIn = true;
+			}
+			else
+			{
+				checkedIn = false;
+
+				checkedOut.setDay(atoi(d.substr(0,2).c_str()));
+				checkedOut.setMonth(atoi(d.substr(2,2).c_str()));
+				checkedOut.setYear(atoi(d.substr(4, 4).c_str()));
 			}
 
+
+			// child = false;
+
+			if (type == "AB")
+			{
+				days = 14;
+			}
+			else if (type == "CB")
+			{
+					// child = true;
+					days = 7;
+			}
+			else if (type == "DVD")
+			{
+				days = 2;
+			}
+			else if (type == "VHS")
+			{
+				days = 3;
+			}
+
+
 		}
+
 
 		//returns true if the book (or media) is avialable to check out
 		bool IsAvailable()
@@ -55,9 +77,9 @@ class Book
 		Date CalcDueDate()
 		{
 			Date dueDate;
-			dueDate.day = checkedOut.day;
-			dueDate.month = checkedOut.month;
-			dueDate.year = checkedOut.year;
+			dueDate.setDay(checkedOut.getDay());
+			dueDate.setMonth(checkedOut.getMonth());
+			dueDate.setYear(checkedOut.getYear());
 
 			for (int i = 0; i < days; i++)
 			{
@@ -67,9 +89,24 @@ class Book
 			return dueDate;
 		}
 
-		String getPerson()
+		string getTitle()
 		{
-			return person;
+			return title;
 		}
+
+		string getType()
+		{
+			return type;
+		}
+
+		string getUser()
+		{
+			return user;
+		}
+
+		// bool IsChildrensBook()
+		// {
+		// 	return child;
+		// }
 		
 };
