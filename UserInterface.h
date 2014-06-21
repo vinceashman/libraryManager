@@ -22,15 +22,15 @@ class UserInterface
         //user checks in book
         //calls menu of books user checked out
         //allow user to select book to check in
-        void CheckIn()
+        void CheckOut()
          {
-             std::cout << "\nCheckIn is called" << endl;//temp
+             std::cout << "\nCheckOut is called" << endl;//temp
              //go through the user's book list and print the list of books with
              //a choice for the user to select which book/media to check in.
              //updates the book list to include the book to show that its available.
              if(userBookList.size() > 0)
              {
-             std::cout <<"\nList of Media checked out by" << userName <<":" << endl;
+             std::cout <<"\nList of Available Media here in Valhalla:" << endl;
              std::cout <<"|------------------------------------------|" << endl;
              for(unsigned int i = 0; i < userBookList.size(); i++)
              {
@@ -55,8 +55,8 @@ class UserInterface
                std::getline(std::cin,theInput);
                return theInput;
         }
-        void CheckOut()
-         {
+        void CheckIn()
+                 {
             std::cout << "\nCheckOut is called" << endl;//temp
             //go through book list and display which books are available to check out
             //user gives choice to what book they want to use.
@@ -79,7 +79,8 @@ class UserInterface
 
             if(userHasBook == true)
             {
-            std::cout <<"\nList of Available Media here in Valhalla:" << endl;
+
+             std::cout <<"\nList of Media checked out by" << userName <<":" << endl;
             std::cout <<"|------------------------------------------|" << endl;
             listOfBooks.BooksCheckedOut(allBooks, userName);
             std::cout <<"|------------------------------------------|" << endl;
