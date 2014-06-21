@@ -17,17 +17,7 @@ class UserInterface
          }
         virtual ~UserInterface() {}
 
-
-        //get available bookList
-        void getBookList()
-        {
-            //call and get the list of available books
-        }
-        //get books from user
-        void getUserBooks()
-        {
-            //get the inventory of the user
-        }
+        
         //user checks in book
         //calls menu of books user checked out
         //allow user to select book to check in
