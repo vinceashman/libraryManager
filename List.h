@@ -93,27 +93,22 @@ void List::ListOverdue(vector<Book*> books, int currentBook, Date currentDate)
 
 		else
 		{
-			dueDate = books[currentBook]->CalcDueDate();
-			dueDay = dueDate.getDay();
-			dueMonth = dueDate.getMonth();
-			dueYear = dueDate.getYear();
-
 			if(todayYear > dueYear)
 			{
 				title = books[currentBook]->getTitle();
-				cout << user << "currently has " << title << "." << "It was due on: "<<dueDay<<"/"<<dueMonth<<"/"<<dueYear<<"."<<endl;
+				cout << user << " currently has " << title << "." << "It was due on: "<<dueDay<<"/"<<dueMonth<<"/"<<dueYear<<"."<<endl;
 			}
 
-			else if(todayMonth > dueMonth)
+			else if(todayYear == dueYear && todayMonth > dueMonth)
 			{
 				title = books[currentBook]->getTitle();
-				cout << user << "currently has " << title << "." << "It was due on: "<<dueDay<<"/"<<dueMonth<<"/"<<dueYear<<"."<<endl;
+				cout << user << " currently has " << title << "." << "It was due on: "<<dueDay<<"/"<<dueMonth<<"/"<<dueYear<<"."<<endl;
 			}
 
-			else if(todayDay > dueDay)
+			else if(todayYear == dueYear && todayMonth == dueMonth && todayDay > dueDay)
 			{
 				title = books[currentBook]->getTitle();
-				cout << user << "currently has " << title << "." << "It was due on: "<<dueDay<<"/"<<dueMonth<<"/"<<dueYear<<"."<<endl;
+				cout << user << " currently has " << title << "." << "It was due on: "<<dueDay<<"/"<<dueMonth<<"/"<<dueYear<<"."<<endl;
 			}
 		}
 
