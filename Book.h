@@ -5,6 +5,7 @@
 #include<vector>
 #include<string>
 #include "Date.h"
+#pragma once
 
 using namespace std;
 
