@@ -167,6 +167,10 @@ class UserInterface
                     currentCounter += 10;
 
                 }
+                else if (choice == "*")
+                {
+                    //std::cout << "\Incorrect entry enter again:";
+                }
                 else
                 {
                     std::cout << "\Incorrect entry enter again:";
@@ -189,6 +193,7 @@ class UserInterface
                 //if(allBooks[i].overDue() == true)
                 //{
                   std::cout << "| " << i << allBooks[i] << " |" << endl;
+                listOfBooks.ListOverdue(allBooks, 0, currentDate);
                 //}
 
             }
@@ -265,8 +270,6 @@ class UserInterface
             //unless main handles this..
             std::string userName;
             //simple placeholders for now
-            std::vector<string> bookList; //available books
-            std::vector<string> userBookList;
             std::vector<Book*> allBooks; //all media
             Date currentDate;
             List listOfBooks; //temp?
