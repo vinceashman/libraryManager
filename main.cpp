@@ -8,88 +8,83 @@
 #include <vector>
 #include "Book.h"
 #include "Date.h"
-#include "userInterface.h"
+#include "UserInterface.h"
 
-//dont know if this is looked down on but this is how i like to do things. 
+//dont know if this is looked down on but this is how i like to do things.
 using namespace std;
 
 
 
 
 
-//not going to handle arguments at the cli at this time. 
+//not going to handle arguments at the cli at this time.
 int main(){
 	//declaration of variables
 	//the vectors for the lists of books and users respectively
-	vector<Book*> books; 
-	vector<User*> users;
-	
-	//our file handler objects. the text files are going to be hard coded. 
-	ifStream userFile, bookFile;
+	cout <<"before book vector creation"<<endl;
+	vector<Book*> books;
+	cout <<"after book vector creation"<<endl;
+	//vector<User*> users;
+
+	//our file handler objects. the text files are going to be hard coded.
+	ifstream bookFile;
 	//youll want to inplement some error checking here.
 	// userFile.open("userlist.txt");
-	// bookFile.open("booklist.txt");
-	try
-	{
-		userfile.open("userlist.txt");
-	}
-	catch (int e)
-	{
-		cout << "Could not open user file.\n"; 
-		return 0;
-	}
+	//bookFile.open("booklist.txt");
+    cout <<"before book opening"<<endl;
 	try
 	{
 		bookFile.open("booklist.txt");
 	}
 	catch (int e)
 	{
-		cout << "Could not open book file.\n"; 
+		cout << "Could not open book file.\n";
 		return 0;
 	}
-	
+    cout <<"theDate creation"<<endl;
 	Date theDate;
-	
-	//instantiate ui object. most likely it would take 3 parameters. a pointer to the 2 vectors and a pointer to the date object. 
-	UserInterface ui(parameter1, parameter2, parameter3);
-	
+
+	//instantiate ui object. most likely it would take 3 parameters. a pointer to the 2 vectors and a pointer to the date object.
+
+
 	//read in the data from the booklist.txt file
+	cout<<"populating books"<<endl;
 	while(!bookFile.eof()){
-		string title, type, dateCheckedOut, user;
+        cout<<"in while loop!"<<endl;
+        string aLine;
+        getline(bookFile, aLine);
+        if(!aLine.empty() )
+        {
+        string title, type, dateCheckedOut, user;
 		bookFile >> title;
 		bookFile >> type;
 		bookFile >> dateCheckedOut;
 		bookFile >> user;
 		books.push_back(new Book(title, type, dateCheckedOut, user));
-	}
-	
-	//read in userlist.txt
-	while(!userFile.eof()){
-		string line; 
-		line = userFile.getLine();
-		while(!line.eof()){
-			//here were going to grab one line at a time so we can grab all the books at the end. 
-			
-		}
-		
-	}
-	
+        }
 
-	
+	}
+	cout <<"books are done populating" <<endl;
+
+	//read in userlist.txt
+
+
+
+    UserInterface ui(books, theDate);
 	//main process control loop
 	do{
 		//main program body here
-		ui.drawMenu();
-		ui.promptForInput();
-						
+		ui.DisplayLoginMenu();
+		//ui.promptForInput();
+
 	}while(!ui.exit());
-	
+
 	//write the user vector to the file
-	
+
 	//write the book vector to the file
-	
+
 	//print exit message and do any necessary cleanup
 	cout << "\nThank you for using the library of Valhalla" << endl;
-	
+
 	return 0;
 }
