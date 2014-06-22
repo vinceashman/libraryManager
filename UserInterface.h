@@ -28,23 +28,43 @@ class UserInterface
              //go through the user's book list and print the list of books with
              //a choice for the user to select which book/media to check in.
              //updates the book list to include the book to show that its available.
-             if(userBookList.size() > 0)
+             string choice;
+             int currentCounter = 0;
+             do
              {
-             std::cout <<"\nList of Available Media here in Valhalla:" << endl;
-             std::cout <<"|------------------------------------------|" << endl;
-             for(unsigned int i = 0; i < userBookList.size(); i++)
-             {
-              std::cout << "| " << i << userBookList[i] << " |" << endl;
-             }
-             std::cout <<"|------------------------------------------|" << endl;
-             std::cout <<"Select a item to check in:" << endl;
-             }
-             else
-             {
-             std::cout <<"\nThere was an Error, going back to main menu" << endl;
-             }
+            std::cout << "\nList of Available Media here in Valhalla:"<< endl;
+            std::cout <<"|------------------------------------------|" << endl;
 
-             DisplayMenu();
+            listOfBooks.ListAvailable(allBooks, currentCounter);
+            std::cout <<"|------------------------------------------|" << endl;
+            if(currentCounter > 0)
+            {
+                std::cout <<"\nEnter P for previous page " ;
+            }
+            if(currentCounter <= allBooks.size())
+            {
+                std::cout <<"\nEnter N for next page " ;
+            }
+                std::cout <<"\nEnter * to return to menu" ;
+
+                choice = promptForInput();
+                if ((choice == "p" || choice == "P" )&& currentCounter > 0)
+                {
+                    currentCounter = 0;
+
+                }
+                else if((choice == "N" || choice == "n") && currentCounter <= allBooks.size())
+                {
+                    currentCounter += 10;
+
+                }
+                else
+                {
+                    std::cout << "\nIncorrect entry enter again:";
+                }
+
+             }
+             while(choice != "*");
          }
          //user checks out book checks user number of books checked out
          //if value is legal call check out menu
@@ -57,18 +77,22 @@ class UserInterface
         }
         void CheckIn()
                  {
-            std::cout << "\nCheckOut is called" << endl;//temp
+            std::cout << "\nCheckIn is called" << endl;//temp
             //go through book list and display which books are available to check out
             //user gives choice to what book they want to use.
             //display in groups of 10?
+
+            //create a user and temp books to hold the books for user to check out menu operations
             string user;
+            std::vector<Book*> tempBooks;
             bool userHasBook = false;
             string choice;
             if(allBooks.size() > 0)
             {
 
-                for(int i = 0; i < allBooks.size(); i++)
+                for(unsigned int i = 0; i < allBooks.size(); i++)
                 {
+                    //check user has anything checked out at all
                     user = allBooks[i]->getUser();
                     if(user == userName)
                     {
@@ -80,18 +104,22 @@ class UserInterface
             if(userHasBook == true)
             {
 
-             std::cout <<"\nList of Media checked out by" << userName <<":" << endl;
+             std::cout <<"\nList of Media checked out by " << userName <<":" << endl;
             std::cout <<"|------------------------------------------|" << endl;
             listOfBooks.BooksCheckedOut(allBooks, userName);
             std::cout <<"|------------------------------------------|" << endl;
             std::cout <<"Select a item to check out:" << endl;
+            string aUser;
             //oice = promptForInput();//need to figure out how to get matching data from list
-
+                for(unsigned int j = 0; j < allBooks.size(); j++)
+                {
+                    aUser = allBooks[j]->getUser();
+                    if(aUser == userName)
+                    {
+                        tempBooks.push_back(allBooks[j]);
+                    }
+                }
             }
-
-             //call option to select media
-             //check if the user is adult or child
-             //check if the user already reached media.
 
             }
             else
@@ -146,10 +174,13 @@ class UserInterface
 
              }
              while(choice != "*");
-
+            DisplayMenu();
         }
         void viewOverDueBooks()
         {
+            currentDate.setMonth(6);
+            currentDate.setDay(27);
+            currentDate.setYear(2014);
             std::cout <<"\nList of Over Due Media here in Valhalla:" << endl;
             std::cout <<"|------------------------------------------|" << endl;
             for (unsigned int i = 0; i < allBooks.size(); i++)
