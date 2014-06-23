@@ -85,37 +85,41 @@ void List::ListOverdue(vector<Book*> books, int currentBook, Date currentDate)
 	todayMonth = currentDate.getMonth();
 	todayYear = currentDate.getYear();
 
+	
 	for(currentBook; currentBook < (startingBook + 10); currentBook++)
 	{
-		user = books[currentBook]->getUser();
-
-		if(user == "library"){}
-
-		else
-		{
-			dueDate = books[currentBook]->CalcDueDate();
-			dueDay = dueDate.getDay();
-			dueMonth = dueDate.getMonth();
-			dueYear = dueDate.getYear();
-			
-			if(todayYear > dueYear)
+		if(currentBook < books.size())
+		{		
+			user = books[currentBook]->getUser();
+	
+			if(user == "library"){}
+	
+			else
 			{
-				title = books[currentBook]->getTitle();
-				cout << user << " currently has " << title << "." << "It was due on: "<<dueDay<<"/"<<dueMonth<<"/"<<dueYear<<"."<<endl;
+				dueDate = books[currentBook]->CalcDueDate();
+				dueDay = dueDate.getDay();
+				dueMonth = dueDate.getMonth();
+				dueYear = dueDate.getYear();
+	
+				if(todayYear > dueYear)
+				{
+					title = books[currentBook]->getTitle();
+					cout << user << " currently has " << title << "." << "It was due on: "<<dueDay<<"/"<<dueMonth<<"/"<<dueYear<<"."<<endl;
+				}
+	
+				else if(todayYear == dueYear && todayMonth > dueMonth)
+				{
+					title = books[currentBook]->getTitle();
+					cout << user << " currently has " << title << "." << "It was due on: "<<dueDay<<"/"<<dueMonth<<"/"<<dueYear<<"."<<endl;
+				}
+	
+				else if(todayYear == dueYear && todayMonth == dueMonth && todayDay > dueDay)
+				{
+					title = books[currentBook]->getTitle();
+					cout << user << " currently has " << title << "." << "It was due on: "<<dueDay<<"/"<<dueMonth<<"/"<<dueYear<<"."<<endl;
+				}
 			}
 
-			else if(todayYear == dueYear && todayMonth > dueMonth)
-			{
-				title = books[currentBook]->getTitle();
-				cout << user << " currently has " << title << "." << "It was due on: "<<dueDay<<"/"<<dueMonth<<"/"<<dueYear<<"."<<endl;
-			}
-
-			else if(todayYear == dueYear && todayMonth == dueMonth && todayDay > dueDay)
-			{
-				title = books[currentBook]->getTitle();
-				cout << user << " currently has " << title << "." << "It was due on: "<<dueDay<<"/"<<dueMonth<<"/"<<dueYear<<"."<<endl;
-			}
 		}
-
 	}
 }
