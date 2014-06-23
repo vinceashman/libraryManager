@@ -28,9 +28,14 @@ int main(){
 	vector<vector<string>> users;
 	//our file handler objects. the text files are going to be hard coded.
 	ifstream bookFile;
-	//youll want to inplement some error checking here.
-	// userFile.open("userlist.txt");
-	//bookFile.open("booklist.txt");
+	
+	//output objects
+	ofstream outUser, outBook;
+	
+	cout <<"theDate creation"<<endl;
+	Date theDate;
+		
+	//reading the files into memory. 
     cout <<"before book opening"<<endl;
 	try
 	{
@@ -41,11 +46,17 @@ int main(){
 		cout << "Could not open book file.\n";
 		return 0;
 	}
-    cout <<"theDate creation"<<endl;
-	Date theDate;
-
-	//instantiate ui object. most likely it would take 3 parameters. a pointer to the 2 vectors and a pointer to the date object.
-
+	
+	//reading in the userfile 
+	try{
+		userFile.open("userlist.txt");
+	}
+    catch (int e)
+	{
+		cout << "Could not open user file.\n";
+	}
+	
+	
 
 	//read in the data from the booklist.txt file
 	cout<<"populating books"<<endl;
@@ -83,17 +94,27 @@ int main(){
 		}//end if
 	}//end while
 
-
-
+	//instantiate UI object. 
     UserInterface ui(books, theDate);
+
 	//main process control loop
 	do{
 		//main program body here
 		ui.DisplayLoginMenu();
 	}while(!ui.exit());
-
-	//write the user vector to the file
 	
+	userFile.close();
+	bookFile.close();
+	
+	//open the files for writing out. 
+	//files are opened in truncate mode so the existing data is replaced. 
+	outUser.open("userList.txt", std::ofstream::trunc);
+	outBook.open("bookList.txt", std::ofstream::trunc);
+	
+	//write the user vector to the file
+	for(int i = 0; i < books.size(); i++){
+		Date tempDate = books[i]->calcDueDate();
+		outBook << books[i]->getTitle() << " " << books.[i]->getType() << " " << tempDate.getMonth() << tempDate.getDay() << tempDate
 	//write the book vector to the file
 
 	//print exit message and do any necessary cleanup
