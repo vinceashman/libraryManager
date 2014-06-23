@@ -16,6 +16,9 @@ class UserInterface
          {
             allBooks = books;
             currentDate = theDate;
+            currentDate.setMonth(6);
+            currentDate.setDay(27);
+            currentDate.setYear(2014);
          }
         virtual ~UserInterface() {}
 
@@ -24,14 +27,15 @@ class UserInterface
         //allow user to select book to check in
         void CheckOut()
          {
-             std::cout << "\nCheckOut is called" << endl;//temp
              //go through the user's book list and print the list of books with
              //a choice for the user to select which book/media to check in.
              //updates the book list to include the book to show that its available.
              string choice;
              int currentCounter = 0;
+
              do
              {
+                  system("cls");
             std::cout << "\nList of Available Media here in Valhalla:"<< endl;
             std::cout <<"|------------------------------------------|" << endl;
 
@@ -45,7 +49,9 @@ class UserInterface
             {
                 std::cout <<"\nEnter N for next page " ;
             }
+                std::cout <<"\nEnter book name to check out:";
                 std::cout <<"\nEnter * to return to menu" ;
+
 
                 choice = promptForInput();
                 if ((choice == "p" || choice == "P" )&& currentCounter > 0)
@@ -58,32 +64,46 @@ class UserInterface
                     currentCounter += 10;
 
                 }
+
                 else
                 {
-                    std::cout << "\nIncorrect entry enter again:";
+                    for(int i = 0; i < allBooks.size(); i++)
+                    {
+                        string title = allBooks[i]->getTitle();
+                        if (choice == title)
+                        {
+                            std::cout << userName << " successfully checked out " << title << endl;
+                            allBooks[i]->setUser(userName);
+                            allBooks[i]->setDate(currentDate);
+                            system("cls");
+                            CheckOut();
+                        }
+                    }
                 }
 
              }
              while(choice != "*");
+             system("cls");
+             DisplayMenu();
          }
          //user checks out book checks user number of books checked out
          //if value is legal call check out menu
         string promptForInput()
         {
                string theInput = "";
-               std::cout << "\nEnter selection:" << endl;
+               std::cout << "\nEnter selection: ";
                std::getline(std::cin,theInput);
                return theInput;
         }
         void CheckIn()
                  {
-            std::cout << "\nCheckIn is called" << endl;//temp
             //go through book list and display which books are available to check out
             //user gives choice to what book they want to use.
             //display in groups of 10?
 
             //create a user and temp books to hold the books for user to check out menu operations
             string user;
+            string lib = "library";
             std::vector<Book*> tempBooks;
             bool userHasBook = false;
             string choice;
@@ -104,44 +124,73 @@ class UserInterface
             if(userHasBook == true)
             {
 
-             std::cout <<"\nList of Media checked out by " << userName <<":" << endl;
+            std::cout <<"\nList of Media checked out by " << userName <<":" << endl;
             std::cout <<"|------------------------------------------|" << endl;
             listOfBooks.BooksCheckedOut(allBooks, userName);
             std::cout <<"|------------------------------------------|" << endl;
             std::cout <<"Select a item to check out:" << endl;
-            string aUser;
             //oice = promptForInput();//need to figure out how to get matching data from list
-                for(unsigned int j = 0; j < allBooks.size(); j++)
+            std::cout <<"\nEnter book name to check out:";
+            std::cout <<"\nEnter * to return to menu" ;
+
+
+                choice = promptForInput();
+                if (choice == "*")
                 {
-                    aUser = allBooks[j]->getUser();
-                    if(aUser == userName)
+                    system("cls");
+                    DisplayMenu();
+                }
+
+                else
+                {
+                     string title;
+                    for(int i = 0; i < allBooks.size(); i++)
                     {
-                        tempBooks.push_back(allBooks[j]);
+                      title = allBooks[i]->getTitle();
+                        if (choice == title)
+                        {
+                            std::cout << userName << " successfully checked out " << title << endl;
+                            allBooks[i]->setUser(lib);
+                        }
+
+                    }
+
+                    if(title != choice && choice != "*")
+                    {
+
+                        system("cls");
+                        CheckIn();
                     }
                 }
             }
-
-            }
             else
             {
-            std::cout <<"\nThere was an Error, going back to main menu" << endl;
+                std::cout <<"\nThere is nothing checked out by " << userName << endl;
+                DisplayMenu();
             }
 
-            DisplayMenu();
+
+            }
+
+
          }
-         void AdvanceDate()
+         //advances the date by a day and automatically adjusts the month/day/year
+         void AdvanceTheDate()
          {
-              std::cout << "\nAdvanceDate is called" << endl;//temp
+              currentDate.AdvanceDate();
+              system("cls");
               DisplayMenu();
          }
         void viewAllBooks()
         {
-            std::cout << "\nviewAllBooks is called" << endl;//temp
-            std::cout << "\nList of All Media here in Valhalla:"<< endl;
+
             string choice;
              int currentCounter = 0;
+
              do
              {
+                 system("cls");
+            std::cout << "\nList of All Media here in Valhalla:"<< endl;
             std::cout <<"|------------------------------------------|" << endl;
 
             listOfBooks.AllBooks(allBooks, currentCounter);
@@ -173,47 +222,55 @@ class UserInterface
                 }
                 else
                 {
-                    std::cout << "\Incorrect entry enter again:";
+
+
                 }
 
              }
              while(choice != "*");
+             system("cls");
             DisplayMenu();
         }
         void viewOverDueBooks()
         {
-            currentDate.setMonth(6);
-            currentDate.setDay(27);
-            currentDate.setYear(2014);
+
             std::cout <<"\nList of Over Due Media here in Valhalla:" << endl;
             std::cout <<"|------------------------------------------|" << endl;
-            for (unsigned int i = 0; i < allBooks.size(); i++)
-            {
-                //check if overdue
-                //if(allBooks[i].overDue() == true)
-                //{
-                  std::cout << "| " << i << allBooks[i] << " |" << endl;
-                listOfBooks.ListOverdue(allBooks, 0, currentDate);
-                //}
 
-            }
+                listOfBooks.ListOverdue(allBooks, 0, currentDate);
+
             std::cout <<"|------------------------------------------|" << endl;
+            std::cout << "Enter * to return to menu" << endl;
+            string choice;
+            choice = promptForInput();
+            if(choice == "*")
+            {
+            system("cls");
             DisplayMenu();
+            }
+            else
+            {
+
+            system("cls");
+           viewOverDueBooks();
+            }
         }
          //login menu call?
         void DisplayLoginMenu()
         {
         std::cout << "User Login:" << endl;
         userName = promptForInput();
-        std::cout << "Welcome to the Library " << userName << endl;
         //got the login name, pass the information for the list
+         system("cls");
         DisplayMenu();
         }
          //main menu call
         void DisplayMenu()
          {
             //add additional menu options when needed, update if statements to include new choices
+            std::cout << "Welcome to the Library " << userName << endl;
             std::cout << "\n|---Library System---|" << endl;
+            std::cout << "\n|---" << currentDate.getMonth() <<"/" << currentDate.getDay() <<"/" <<currentDate.getYear() << "---|" << endl;
             std::cout << "\\*------------------*/" << endl;
             std::cout << "\nTo Check In enter 1"<< endl;
             std::cout << "To Check Out enter 2" << endl;
@@ -232,34 +289,40 @@ class UserInterface
 
            if(choice == "1")
            {
+               system("cls");
               CheckIn();
            }
            else if(choice == "2")
            {
+               system("cls");
                CheckOut();
            }
            else if(choice == "3")
            {
+               system("cls");
                viewAllBooks();
            }
            else if(choice == "4")
            {
+               system("cls");
               viewOverDueBooks();
            }
            else if(choice == "5")
            {
-               AdvanceDate();
+               system("cls");
+               AdvanceTheDate();
            }
            else if(choice == "*")
            {
-                return;
+               system("cls");
+                 exit();
            }
            else
            {
-              cout << "\nIncorrect choice" << endl;
+              system("cls");
                 DisplayMenu();
            }
-            exit();
+
          }//end of displaymenu function
     bool exit()
     {
