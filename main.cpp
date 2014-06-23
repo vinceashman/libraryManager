@@ -111,14 +111,24 @@ int main(){
 	outUser.open("userList.txt", std::ofstream::trunc);
 	outBook.open("bookList.txt", std::ofstream::trunc);
 	
-	//write the user vector to the file
+	//write the book vector to the file
 	for(int i = 0; i < books.size(); i++){
 		Date tempDate = books[i]->calcDueDate();
-		outBook << books[i]->getTitle() << " " << books.[i]->getType() << " " << tempDate.getMonth() << tempDate.getDay() << tempDate
-	//write the book vector to the file
-
+		outBook << books[i]->getTitle() << " " << books.[i]->getType() << " " << tempDate.getMonth() << tempDate.getDay() << tempDate.getYear() << " " << books[i]->getUser() << endl;
+	}
+	
+	//write the user vector to the file
+	for(int i = 0; i < users.size(); i++){
+		outUser << users[i][0] << " " users[i][1] << endl;
+	}
+	
+	//close the output files. 
+	outUser.close();
+	outBooks.close();
+	
 	//print exit message and do any necessary cleanup
 	cout << "\nThank you for using the library of Valhalla" << endl;
-
+	
+	
 	return 0;
 }
