@@ -16,6 +16,9 @@ class UserInterface
          {
             allBooks = books;
             currentDate = theDate;
+            currentDate.setMonth(6);
+            currentDate.setDay(27);
+            currentDate.setYear(2014);
          }
         virtual ~UserInterface() {}
 
@@ -126,12 +129,16 @@ class UserInterface
             {
             std::cout <<"\nThere was an Error, going back to main menu" << endl;
             }
-
+            {
+                std::cout <<"\nThere is nothing checked out by " << userName << endl;
+            }
             DisplayMenu();
          }
-         void AdvanceDate()
+         //advances the date by a day and automatically adjusts the month/day/year
+         void AdvanceTheDate()
          {
               std::cout << "\nAdvanceDate is called" << endl;//temp
+              currentDate.AdvanceDate();
               DisplayMenu();
          }
         void viewAllBooks()
@@ -167,6 +174,10 @@ class UserInterface
                     currentCounter += 10;
 
                 }
+                else if (choice == "*")
+                {
+                    //std::cout << "\Incorrect entry enter again:";
+                }
                 else
                 {
                     std::cout << "\Incorrect entry enter again:";
@@ -178,9 +189,7 @@ class UserInterface
         }
         void viewOverDueBooks()
         {
-            currentDate.setMonth(6);
-            currentDate.setDay(27);
-            currentDate.setYear(2014);
+
             std::cout <<"\nList of Over Due Media here in Valhalla:" << endl;
             std::cout <<"|------------------------------------------|" << endl;
             for (unsigned int i = 0; i < allBooks.size(); i++)
@@ -189,6 +198,7 @@ class UserInterface
                 //if(allBooks[i].overDue() == true)
                 //{
                   std::cout << "| " << i << allBooks[i] << " |" << endl;
+                listOfBooks.ListOverdue(allBooks, 0, currentDate);
                 //}
 
             }
@@ -209,6 +219,7 @@ class UserInterface
          {
             //add additional menu options when needed, update if statements to include new choices
             std::cout << "\n|---Library System---|" << endl;
+            std::cout << "\n|---" << currentDate.getMonth() <<"/" << currentDate.getDay() <<"/" <<currentDate.getYear() << "---|" << endl;
             std::cout << "\\*------------------*/" << endl;
             std::cout << "\nTo Check In enter 1"<< endl;
             std::cout << "To Check Out enter 2" << endl;
@@ -243,7 +254,7 @@ class UserInterface
            }
            else if(choice == "5")
            {
-               AdvanceDate();
+               AdvanceTheDate();
            }
            else if(choice == "*")
            {
@@ -265,8 +276,6 @@ class UserInterface
             //unless main handles this..
             std::string userName;
             //simple placeholders for now
-            std::vector<string> bookList; //available books
-            std::vector<string> userBookList;
             std::vector<Book*> allBooks; //all media
             Date currentDate;
             List listOfBooks; //temp?
