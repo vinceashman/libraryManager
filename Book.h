@@ -21,7 +21,7 @@ class Book
 		bool checkedIn;
 		// bool child;
 		int days;
-		
+
 
 	public:
 		Book(string ti, string ty, string d, string u)
@@ -86,7 +86,7 @@ class Book
 			{
 				dueDate.AdvanceDate();
 			}
-			
+
 			return dueDate;
 		}
 
@@ -105,9 +105,19 @@ class Book
 			return user;
 		}
 
+		void setUser(string aUser)
+		{
+		    user = aUser;
+		}
+
+		void setDate(Date aDate)
+		{
+		    checkedOut = aDate;
+		}
+
 		// bool IsChildrensBook()
 		// {
 		// 	return child;
 		// }
-		
+
 };
