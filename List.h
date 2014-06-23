@@ -26,12 +26,17 @@ void ListAvailable(vector<Book*> books, int currentBook)
 	//depending on the currentBook parameter passed.
 	for(currentBook; currentBook < (startingBook + 10); currentBook++)
 	{
+	    if(currentBook < books.size())
+        {
+
+
 		user = books[currentBook]->getUser();
 		if(currentBook < books.size() && user == "library") //currentBook can never be bigger than the index of the last element in the vector
 		{
 			title = books[currentBook]->getTitle();
 			cout << currentBook << ". " << title << endl;
 		}
+        }
 	}
 
 }
@@ -101,7 +106,7 @@ void ListOverdue(vector<Book*> books, int currentBook, Date currentDate)
 			dueMonth = dueDate.getMonth();
 			dueYear = dueDate.getYear();
 
-			if(todayYear > dueYear)
+			if(todayYear > dueYear )
 			{
 				title = books[currentBook]->getTitle();
 				cout << user << " currently has " << title << "." << "It was due on: "<<dueDay<<"/"<<dueMonth<<"/"<<dueYear<<"."<<endl;
