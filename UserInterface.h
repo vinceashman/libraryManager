@@ -48,7 +48,9 @@ class UserInterface
             {
                 std::cout <<"\nEnter N for next page " ;
             }
+                std::cout <<"\nEnter book name to check out:";
                 std::cout <<"\nEnter * to return to menu" ;
+
 
                 choice = promptForInput();
                 if ((choice == "p" || choice == "P" )&& currentCounter > 0)
@@ -61,13 +63,26 @@ class UserInterface
                     currentCounter += 10;
 
                 }
+
                 else
                 {
+                    for(int i = 0; i < allBooks.size(); i++)
+                    {
+                        string title = allBooks[i]->getTitle();
+                        if (choice == title)
+                        {
+                            std::cout << userName << " successfully checked out " << title << endl;
+                            allBooks[i]->setUser(userName);
+                            allBooks[i]->setDate(currentDate);
+                            CheckOut();
+                        }
+                    }
                     std::cout << "\nIncorrect entry enter again:";
                 }
 
              }
              while(choice != "*");
+             DisplayMenu();
          }
          //user checks out book checks user number of books checked out
          //if value is legal call check out menu
@@ -87,6 +102,7 @@ class UserInterface
 
             //create a user and temp books to hold the books for user to check out menu operations
             string user;
+            string lib = "library";
             std::vector<Book*> tempBooks;
             bool userHasBook = false;
             string choice;
@@ -112,23 +128,35 @@ class UserInterface
             listOfBooks.BooksCheckedOut(allBooks, userName);
             std::cout <<"|------------------------------------------|" << endl;
             std::cout <<"Select a item to check out:" << endl;
-            string aUser;
             //oice = promptForInput();//need to figure out how to get matching data from list
-                for(unsigned int j = 0; j < allBooks.size(); j++)
+            std::cout <<"\nEnter book name to check out:";
+            std::cout <<"\nEnter * to return to menu" ;
+
+
+                choice = promptForInput();
+                if (choice == "*")
                 {
-                    aUser = allBooks[j]->getUser();
-                    if(aUser == userName)
+                    DisplayMenu();
+                }
+
+                else
+                {
+                     string title;
+                    for(int i = 0; i < allBooks.size(); i++)
                     {
-                        tempBooks.push_back(allBooks[j]);
+                      title = allBooks[i]->getTitle();
+                        if (choice == title)
+                        {
+                            std::cout << userName << " successfully checked out " << title << endl;
+                            allBooks[i]->setUser(lib);
+                        }
                     }
                 }
             }
 
+
             }
             else
-            {
-            std::cout <<"\nThere was an Error, going back to main menu" << endl;
-            }
             {
                 std::cout <<"\nThere is nothing checked out by " << userName << endl;
             }
@@ -192,16 +220,9 @@ class UserInterface
 
             std::cout <<"\nList of Over Due Media here in Valhalla:" << endl;
             std::cout <<"|------------------------------------------|" << endl;
-            for (unsigned int i = 0; i < allBooks.size(); i++)
-            {
-                //check if overdue
-                //if(allBooks[i].overDue() == true)
-                //{
-                  std::cout << "| " << i << allBooks[i] << " |" << endl;
-                listOfBooks.ListOverdue(allBooks, 0, currentDate);
-                //}
 
-            }
+                listOfBooks.ListOverdue(allBooks, 0, currentDate);
+
             std::cout <<"|------------------------------------------|" << endl;
             DisplayMenu();
         }
