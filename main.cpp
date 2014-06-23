@@ -24,8 +24,8 @@ int main(){
 	cout <<"before book vector creation"<<endl;
 	vector<Book*> books;
 	cout <<"after book vector creation"<<endl;
-	//vector<User*> users;
-
+	//vector of users;
+	vector<vector<string>> users;
 	//our file handler objects. the text files are going to be hard coded.
 	ifstream bookFile;
 	//youll want to inplement some error checking here.
@@ -67,6 +67,21 @@ int main(){
 	cout <<"books are done populating" <<endl;
 
 	//read in userlist.txt
+	cout << "Populating userlist" << endl;
+	while(!userFile.eof()){
+		string aLine;
+		getline(userFile, aLine);
+		if(!aLine.empty()){
+			string name, type;
+			userFile >> name;
+			userFile >> type;
+			//storing the temp vector so we can push the whole thing onto the main users vector.
+			vector<string> tempVect;
+			tempVect.push_back(name);
+			tempVect.push_back(type);
+			users.push_back(tempVect);
+		}//end if
+	}//end while
 
 
 
@@ -75,12 +90,10 @@ int main(){
 	do{
 		//main program body here
 		ui.DisplayLoginMenu();
-		//ui.promptForInput();
-
 	}while(!ui.exit());
 
 	//write the user vector to the file
-
+	
 	//write the book vector to the file
 
 	//print exit message and do any necessary cleanup
