@@ -27,7 +27,7 @@ int main(){
 	//vector of users;
 	vector<vector<string>> users;
 	//our file handler objects. the text files are going to be hard coded.
-	ifstream bookFile;
+	ifstream bookFile, userFile;
 	
 	//output objects
 	ofstream outUser, outBook;
@@ -62,17 +62,17 @@ int main(){
 	cout<<"populating books"<<endl;
 	while(!bookFile.eof()){
         cout<<"in while loop!"<<endl;
-        string aLine;
-        getline(bookFile, aLine);
-        if(!aLine.empty() )
-        {
+        //string aLine;
+        //getline(bookFile, aLine);
+        //if(!aLine.empty() )
+        //{
         string title, type, dateCheckedOut, user;
 		bookFile >> title;
 		bookFile >> type;
 		bookFile >> dateCheckedOut;
 		bookFile >> user;
 		books.push_back(new Book(title, type, dateCheckedOut, user));
-        }
+        //}
 
 	}
 	cout <<"books are done populating" <<endl;
@@ -80,18 +80,18 @@ int main(){
 	//read in userlist.txt
 	cout << "Populating userlist" << endl;
 	while(!userFile.eof()){
-		string aLine;
-		getline(userFile, aLine);
-		if(!aLine.empty()){
-			string name, type;
-			userFile >> name;
-			userFile >> type;
-			//storing the temp vector so we can push the whole thing onto the main users vector.
-			vector<string> tempVect;
-			tempVect.push_back(name);
-			tempVect.push_back(type);
-			users.push_back(tempVect);
-		}//end if
+		//string aLine;
+		//getline(userFile, aLine);
+		//if(!aLine.empty()){
+		string name, type;
+		userFile >> name;
+		userFile >> type;
+		//storing the temp vector so we can push the whole thing onto the main users vector.
+		vector<string> tempVect;
+		tempVect.push_back(name);
+		tempVect.push_back(type);
+		users.push_back(tempVect);
+		//}//end if
 	}//end while
 
 	//instantiate UI object. 
@@ -113,18 +113,18 @@ int main(){
 	
 	//write the book vector to the file
 	for(int i = 0; i < books.size(); i++){
-		Date tempDate = books[i]->calcDueDate();
-		outBook << books[i]->getTitle() << " " << books.[i]->getType() << " " << tempDate.getMonth() << tempDate.getDay() << tempDate.getYear() << " " << books[i]->getUser() << endl;
+		Date tempDate = books[i]->CalcDueDate();
+		outBook << books[i]->getTitle() << " " << books[i]->getType() << " " << tempDate.getMonth() << tempDate.getDay() << tempDate.getYear() << " " << books[i]->getUser() << endl;
 	}
 	
 	//write the user vector to the file
 	for(int i = 0; i < users.size(); i++){
-		outUser << users[i][0] << " " users[i][1] << endl;
+		outUser << users[i][0] << " " << users[i][1] << endl;
 	}
 	
 	//close the output files. 
 	outUser.close();
-	outBooks.close();
+	outBook.close();
 	
 	//print exit message and do any necessary cleanup
 	cout << "\nThank you for using the library of Valhalla" << endl;
