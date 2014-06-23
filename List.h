@@ -93,6 +93,11 @@ void List::ListOverdue(vector<Book*> books, int currentBook, Date currentDate)
 
 		else
 		{
+			dueDate = books[currentBook]->CalcDueDate();
+			dueDay = dueDate.getDay();
+			dueMonth = dueDate.getMonth();
+			dueYear = dueDate.getYear();
+			
 			if(todayYear > dueYear)
 			{
 				title = books[currentBook]->getTitle();
