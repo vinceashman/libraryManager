@@ -13,16 +13,77 @@ using namespace std;
 class UserInterface
 {
     public:
-        UserInterface(vector<Book*> books, Date theDate)
+        UserInterface(vector<Book*> books, Date theDate, vector<vector<string> > theUsers)
          {
             allBooks = books;
             currentDate = theDate;
+            userList = theUsers;
             //currentDate.setMonth(8);
             //currentDate.setDay(2);
             //currentDate.setYear(2014);
          }
         virtual ~UserInterface() {}
+        bool checkUser()
+        {
 
+            int counter = 0;
+            for(int i = 0; i < userList.size();i++)
+            {
+
+                for(unsigned int j = 0; j < 2;j++)
+
+                {
+
+                    if(userName == userList[i][0])
+                    {
+
+                        if(userList[i][1] == "AD")
+                        {
+                            adult == true;
+
+                        }
+                        else
+                        {
+                            adult == false;
+                        }
+                          string aUser;
+                        for(int k = 0; k < allBooks.size(); k++)
+                        {
+                           aUser = allBooks[k]->getUser();
+                            if(userName == aUser)
+                            {
+                                if(adult == true)
+                                {
+                                    if (counter < 7)
+                                    {
+                                        counter++;
+                                    }
+                                    else
+                                    {
+                                        return false;
+                                    }
+                                }
+                                else
+                                {
+                                    if(counter < 4)
+                                    {
+                                        counter++;
+                                    }
+                                    else
+                                    {
+                                        return false;
+                                    }
+                                }
+
+                            }
+
+                        }
+
+                    }
+                }
+            }
+            return false;
+        }
         //user checks in book
         //calls menu of books user checked out
         //allow user to select book to check in
@@ -166,7 +227,10 @@ class UserInterface
                     {
                       title = allBooks[i]->getTitle();
                       auser = allBooks[i]->getUser();
-
+                        Date resetDate;
+                        resetDate.setDay(0);
+                        resetDate.setMonth(0);
+                        resetDate.setYear(0000);
                       string is;
                     std::ostringstream convert;
                       convert << i;
@@ -175,11 +239,13 @@ class UserInterface
                         {
                             std::cout << userName << " successfully checked out " << title << endl;
                             allBooks[i]->setUser(lib);
+                            allBooks[i]->setDate(resetDate);
                         }
                         if(choice == is && auser == userName)
                         {
                            std::cout << userName << " successfully checked out " << title << endl;
                             allBooks[i]->setUser(lib);
+                            allBooks[i]->setDate(resetDate);
                         }
 
                     }
@@ -283,9 +349,7 @@ class UserInterface
            viewOverDueBooks();
             }
         }
-
-
-//this needs to be able to handle getting a vector of vectors of strings. 
+         //login menu call?
         void DisplayLoginMenu(vector<vector<string> > users)
             {
             std::cout << "|--------Library--------|" << endl;
@@ -299,13 +363,13 @@ class UserInterface
 			    cout << "the user input is " << userName << endl;
 			    //determines if the user is actually in the list
 			    for(int i = 0; i < users.size(); i++){
-    				cout << "from users " << users[i][0] << endl;
+    				//cout << "from users " << users[i][0] << endl;
     				if(userName == users[i][0]){
 					    inList = true;
 				    }
 			    }
 			    std::cout << "Please enter a valid user name" << endl;
-			    
+
 		    }
 		//got the login name, pass the information for the list
          system("cls");
@@ -367,6 +431,7 @@ class UserInterface
            else
            {
               system("cls");
+              bool check = checkUser();
                 DisplayMenu();
            }
 
@@ -379,8 +444,10 @@ class UserInterface
             //adding a username variable for now to pass to other objects..
             //unless main handles this..
             std::string userName;
+            bool adult;
             //simple placeholders for now
             std::vector<Book*> allBooks; //all media
+            vector<vector<string> > userList;
             Date currentDate;
             List listOfBooks; //temp?
 };
