@@ -24,13 +24,13 @@ int main(){
 	//the vectors for the lists of books and users respectively
 	vector<Book*> books;
 
-	//vector<User*> users;
+	vector<vector<string> > users;
 
 	//our file handler objects. the text files are going to be hard coded.
-	ifstream bookFile;
-	//youll want to inplement some error checking here.
-	// userFile.open("userlist.txt");
-	//bookFile.open("booklist.txt");
+	ifstream bookFile, userFile;
+	ofstream outBook, outUser;
+	
+	
 	try
 	{
 		bookFile.open("booklist.txt");
@@ -40,11 +40,16 @@ int main(){
 		cout << "Could not open book file.\n";
 		return 0;
 	}
-
+	try
+	{
+		userFile.open("userlist.txt");
+	}
+	catch (int e)
+	{
+		cout << "Could not open user file.\n";
+	}
+	
 	Date theDate;
-
-	//instantiate ui object. most likely it would take 3 parameters. a pointer to the 2 vectors and a pointer to the date object.
-
 
 	//read in the data from the booklist.txt file
 	while(!bookFile.eof()){
@@ -70,10 +75,20 @@ int main(){
 	}
 	cout <<"books are done populating" <<endl;
 
-	//read in userlist.txt
-
-
-
+	//populate the user vector
+	cout << "Populating userlist" << endl;
+	while(!userFile.eof()){
+		string name, type;
+		userFile >> name;
+		userFile >> type;
+		//storing the temp vector so we can push the whole thing onto the main users vector.
+		vector<string> tempVect;
+		tempVect.push_back(name);
+		tempVect.push_back(type);
+		users.push_back(tempVect);
+		//}//end if
+	}//end while
+	
     UserInterface ui(books, theDate);
 	//main process control loop
 	do{
@@ -83,10 +98,29 @@ int main(){
 
 	}while(!ui.exit());
 
+	//close the book files
+	userFile.close();
+	bookFile.close();
+	
+	
+	//opens the files to write to them.
+	outUser.open("userList.txt", std::ofstream::trunc);
+	outBook.open("bookList.txt", std::ofstream::trunc);
+	
 	//write the user vector to the file
-
+	for(int i = 0; i < users.size(); i++){
+		outUser << users[i][0] << " " << users[i][1] << endl;
+	}
+	
 	//write the book vector to the file
-
+	for(int i = 0; i < books.size(); i++){
+		Date tempDate = books[i]->CalcDueDate();
+		outBook << books[i]->getTitle() << " " << books[i]->getType() << " " << tempDate.getMonth() << tempDate.getDay() << tempDate.getYear() << " " << books[i]->getUser() << endl;
+	}
+	
+	outUser.close();
+	outBook.close();
+	
 	//print exit message and do any necessary cleanup
 	cout << "\nThank you for using the library of Valhalla" << endl;
     system("pause");
