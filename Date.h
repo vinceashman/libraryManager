@@ -30,6 +30,10 @@ class Date
 					day = 1;
 					month++;
 				}
+				else
+				{
+					day++;
+				}
 			}
 			if (month+1 == 4 || month+1 == 6 || month+1 == 9 || month+1 == 11)
 			{
@@ -37,6 +41,10 @@ class Date
 				{
 					day = 1;
 					month++;
+				}
+				else 
+				{
+					day++;
 				}
 			}
 			else if (day == 31)
