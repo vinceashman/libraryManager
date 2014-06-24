@@ -5,6 +5,7 @@
 #include <string>
 #include <fstream>
 #include <iostream>
+#include <sstream>
 #include <vector>
 #include "Book.h"
 #include "Date.h"
@@ -48,16 +49,27 @@ int main(){
 	//read in the data from the booklist.txt file
 	while(!bookFile.eof()){
         string aLine;
-        getline(bookFile, aLine);
+		getline(bookFile, aLine);
         if(!aLine.empty() )
         {
-        string title, type, dateCheckedOut, user;
-		bookFile >> title;
-		cout << title << " is the Title " << endl;
-		bookFile >> type;
-		bookFile >> dateCheckedOut;
-		bookFile >> user;
-        books.push_back(new Book(title, type, dateCheckedOut, user));
+
+		istringstream iss(aLine);
+		string title, type, dateCheckedOut, user;
+		iss >> title;
+		// cout << title << " is the Title " << endl;
+		iss >> type;
+		// cout << type << " is the Type " << endl;
+		iss >> dateCheckedOut;
+		// cout << dateCheckedOut << " is the date " << endl;
+		iss >> user;
+		// cout << user << " is the user " << endl;
+		books.push_back(new Book(title, type, dateCheckedOut, user));
+		// bookFile >> title;
+		// cout << title << " is the Title " << endl;
+		// bookFile >> type;
+		// bookFile >> dateCheckedOut;
+		// bookFile >> user;
+        // books.push_back(new Book(title, type, dateCheckedOut, user));
 
         }
 
