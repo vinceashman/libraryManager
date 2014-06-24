@@ -28,11 +28,14 @@ void List::ListAvailable(vector<Book*> books, int currentBook)
 	//depending on the currentBook parameter passed.
 	for(currentBook; currentBook < (startingBook + 10); currentBook++)
 	{
-		user = books[currentBook]->getUser();
-		if(currentBook < books.size() && user == "library") //currentBook can never be bigger than the index of the last element in the vector
+		if(currentBook < books.size())
 		{
-			title = books[currentBook]->getTitle();
-			cout << currentBook << ". " << title << endl;
+			user = books[currentBook]->getUser();
+			if(user == "library") //currentBook can never be bigger than the index of the last element in the vector
+			{
+				title = books[currentBook]->getTitle();
+				cout << currentBook << ". " << title << endl;
+			}
 		}
 	}
 }
@@ -44,7 +47,7 @@ void List::AllBooks(vector<Book*> books, int currentBook)
 
 	for(currentBook; currentBook < (startingBook + 10); currentBook++)
 	{
-		if(currentBook < (books.size()-1))
+		if(currentBook < books.size())
 		{
 			user = books[currentBook]->getUser();
 			title = books[currentBook]->getTitle();
@@ -87,7 +90,7 @@ void List::ListOverdue(vector<Book*> books, int currentBook, Date currentDate)
 	
 	for(currentBook; currentBook < (startingBook + 10); currentBook++)
 	{
-		if(currentBook < (books.size()-1))
+		if(currentBook < books.size())
 		{
 			user = books[currentBook]->getUser();
 
