@@ -22,7 +22,6 @@ using namespace std;
 int main(){
 	//declaration of variables
 	//the vectors for the lists of books and users respectively
-<<<<<<< HEAD
 	vector<Book*> books;
 
 	//vector<User*> users;
@@ -35,7 +34,6 @@ int main(){
 	try
 	{
 		bookFile.open("booklist.txt");
-=======
 	cout <<"before book vector creation"<<endl;
 	vector<Book*> books;
 	cout <<"after book vector creation"<<endl;
@@ -65,11 +63,9 @@ int main(){
 	//reading in the userfile 
 	try{
 		userFile.open("userlist.txt");
->>>>>>> master
 	}
     catch (int e)
 	{
-<<<<<<< HEAD
 		cout << "Could not open book file.\n";
 		return 0;
 	}
@@ -78,17 +74,14 @@ int main(){
 
 	//instantiate ui object. most likely it would take 3 parameters. a pointer to the 2 vectors and a pointer to the date object.
 
-=======
 		cout << "Could not open user file.\n";
 	}
 	
 	
->>>>>>> master
 
 	//read in the data from the booklist.txt file
 	cout<<"populating books"<<endl;
 	while(!bookFile.eof()){
-<<<<<<< HEAD
         string aLine;
 		getline(bookFile, aLine);
         if(!aLine.empty() )
@@ -107,7 +100,6 @@ int main(){
 			books.push_back(new Book(title, type, dateCheckedOut, user));
 
         }
-=======
         cout<<"in while loop!"<<endl;
         //string aLine;
         //getline(bookFile, aLine);
@@ -120,18 +112,15 @@ int main(){
 		bookFile >> user;
 		books.push_back(new Book(title, type, dateCheckedOut, user));
         //}
->>>>>>> master
 
 	}
 	cout <<"books are done populating" <<endl;
 
 	//read in userlist.txt
-<<<<<<< HEAD
 
 
 
     UserInterface ui(books, theDate);
-=======
 	cout << "Populating userlist" << endl;
 	while(!userFile.eof()){
 		//string aLine;
@@ -151,12 +140,10 @@ int main(){
 	//instantiate UI object. 
     UserInterface ui(books, theDate);
 
->>>>>>> master
 	//main process control loop
 	do{
 		//main program body here
 		ui.DisplayLoginMenu();
-<<<<<<< HEAD
 		//ui.promptForInput();
 
 	}while(!ui.exit());
@@ -168,7 +155,6 @@ int main(){
 	//print exit message and do any necessary cleanup
 	cout << "\nThank you for using the library of Valhalla" << endl;
     system("pause");
-=======
 	}while(!ui.exit());
 	
 	userFile.close();
@@ -198,6 +184,5 @@ int main(){
 	cout << "\nThank you for using the library of Valhalla" << endl;
 	
 	
->>>>>>> master
 	return 0;
 }
