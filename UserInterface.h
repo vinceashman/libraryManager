@@ -301,7 +301,7 @@ class UserInterface
 			    for(int i = 0; i < users.size(); i++){
     				cout << "from users " << users[i][0] << endl;
     				if(userName == users[i][0]){
-					    inList == true;
+					    inList = true;
 				    }
 			    }
 			    std::cout << "Please enter a valid user name" << endl;
