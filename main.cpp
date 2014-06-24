@@ -53,23 +53,17 @@ int main(){
         if(!aLine.empty() )
         {
 
-		istringstream iss(aLine);
-		string title, type, dateCheckedOut, user;
-		iss >> title;
-		// cout << title << " is the Title " << endl;
-		iss >> type;
-		// cout << type << " is the Type " << endl;
-		iss >> dateCheckedOut;
-		// cout << dateCheckedOut << " is the date " << endl;
-		iss >> user;
-		// cout << user << " is the user " << endl;
-		books.push_back(new Book(title, type, dateCheckedOut, user));
-		// bookFile >> title;
-		// cout << title << " is the Title " << endl;
-		// bookFile >> type;
-		// bookFile >> dateCheckedOut;
-		// bookFile >> user;
-        // books.push_back(new Book(title, type, dateCheckedOut, user));
+			istringstream iss(aLine);
+			string title, type, dateCheckedOut, user;
+			iss >> title;
+			// cout << title << " is the Title " << endl;
+			iss >> type;
+			// cout << type << " is the Type " << endl;
+			iss >> dateCheckedOut;
+			// cout << dateCheckedOut << " is the date " << endl;
+			iss >> user;
+			// cout << user << " is the user " << endl;
+			books.push_back(new Book(title, type, dateCheckedOut, user));
 
         }
 
