@@ -44,7 +44,7 @@ void List::AllBooks(vector<Book*> books, int currentBook)
 
 	for(currentBook; currentBook < (startingBook + 10); currentBook++)
 	{
-		if(currentBook < books.size())
+		if(currentBook < (books.size()-1))
 		{
 			user = books[currentBook]->getUser();
 			title = books[currentBook]->getTitle();
@@ -87,7 +87,7 @@ void List::ListOverdue(vector<Book*> books, int currentBook, Date currentDate)
 	
 	for(currentBook; currentBook < (startingBook + 10); currentBook++)
 	{
-		if(currentBook < books.size())
+		if(currentBook < (books.size()-1))
 		{
 			user = books[currentBook]->getUser();
 
