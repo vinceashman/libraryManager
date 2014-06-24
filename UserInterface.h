@@ -302,9 +302,9 @@ class UserInterface
 					    inList == true;
 				    }
 			    }
-			    std::cout << "Please enter a valid user name << endl;
+			    std::cout << "Please enter a valid user name" << endl;
 			    
-		}
+		    }
 		//got the login name, pass the information for the list
          system("cls");
         DisplayMenu();
