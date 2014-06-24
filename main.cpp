@@ -93,7 +93,7 @@ int main(){
 	//main process control loop
 	do{
 		//main program body here
-		ui.DisplayLoginMenu();
+		ui.DisplayLoginMenu(users);
 		//ui.promptForInput();
 
 	}while(!ui.exit());
