@@ -299,7 +299,7 @@ class UserInterface
 			    cout << "the user input is " << userName << endl;
 			    //determines if the user is actually in the list
 			    for(int i = 0; i < users.size(); i++){
-    				cout << "from users " << users[i][0]
+    				cout << "from users " << users[i][0] << endl;
     				if(userName == users[i][0]){
 					    inList == true;
 				    }
