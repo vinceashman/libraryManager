@@ -119,11 +119,6 @@ int main(){
 		else{
 			Date tempDate = books[i]->getCheckedOut();
 
-			int checkedMonth, checkedDay, checkedYear;
-			checkedMonth = tempDate.getMonth();
-			checkedDay = tempDate.getDay();
-			checkedYear = tempDate.getYear();
-
 			outBook << books[i]->getTitle() << " " << books[i]->getType() << " ";
 			outBook.fill('0');
 			outBook.width( 2 );
