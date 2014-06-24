@@ -106,19 +106,19 @@ void List::ListOverdue(vector<Book*> books, int currentBook, Date currentDate)
 				if(todayYear > dueYear)
 				{
 					title = books[currentBook]->getTitle();
-					cout << user << " currently has " << title << "." << "It was due on: "<<dueDay<<"/"<<dueMonth<<"/"<<dueYear<<"."<<endl;
+					cout << user << " currently has " << title << "." << "It was due on: "<<dueMonth<<"/"<<dueDay<<"/"<<dueYear<<"."<<endl;
 				}
 
 				else if(todayYear == dueYear && todayMonth > dueMonth)
 				{
 					title = books[currentBook]->getTitle();
-					cout << user << " currently has " << title << "." << "It was due on: "<<dueDay<<"/"<<dueMonth<<"/"<<dueYear<<"."<<endl;
+					cout << user << " currently has " << title << "." << "It was due on: "<<dueMonth<<"/"<<dueDay<<"/"<<dueYear<<"."<<endl;
 				}
 
 				else if(todayYear == dueYear && todayMonth == dueMonth && todayDay > dueDay)
 				{
 					title = books[currentBook]->getTitle();
-					cout << user << " currently has " << title << "." << "It was due on: "<<dueDay<<"/"<<dueMonth<<"/"<<dueYear<<"."<<endl;
+					cout << user << " currently has " << title << "." << "It was due on: "<<dueMonth<<"/"<<dueDay<<"/"<<dueYear<<"."<<endl;
 				}
 			}
 		}
