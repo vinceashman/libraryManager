@@ -375,10 +375,10 @@ class UserInterface
 		    bool inList = false;
 		    while(!inList){
 			    userName = promptForInput();
-			    cout << "the user input is " << userName << endl;
+			  //  cout << "the user input is " << userName << endl;
 			    //determines if the user is actually in the list
 			    for(int i = 0; i < users.size(); i++){
-    				cout << "from users " << users[i][0] << endl;
+    			//	cout << "from users " << users[i][0] << endl;
     				if(userName == users[i][0]){
 					    inList = true;
 				    }
