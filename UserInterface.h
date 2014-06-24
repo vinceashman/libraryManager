@@ -23,66 +23,76 @@ class UserInterface
             //currentDate.setYear(2014);
          }
         virtual ~UserInterface() {}
-        bool checkUser()
+        bool checkUser(string atype)
         {
 
             int counter = 0;
-            for(int i = 0; i < userList.size();i++)
-            {
-
-                for(unsigned int j = 0; j < 2;j++)
-
-                {
-
-                    if(userName == userList[i][0])
-                    {
-
-                        if(userList[i][1] == "AD")
-                        {
-                            adult == true;
-
-                        }
-                        else
-                        {
-                            adult == false;
-                        }
-                          string aUser;
+             string aUser;
+             bool adult = false;
                         for(int k = 0; k < allBooks.size(); k++)
                         {
                            aUser = allBooks[k]->getUser();
                             if(userName == aUser)
                             {
-                                if(adult == true)
-                                {
-                                    if (counter < 7)
-                                    {
-                                        counter++;
-                                    }
-                                    else
-                                    {
-                                        return false;
-                                    }
-                                }
-                                else
-                                {
-                                    if(counter < 4)
-                                    {
-                                        counter++;
-                                    }
-                                    else
-                                    {
-                                        return false;
-                                    }
-                                }
+                                counter++;
 
                             }
 
                         }
+            for(int i = 0; i < userList.size();i++)
+            {
+
+                    if(userName == userList[i][0])
+                    {
+                        if(userList[i][1] == "AD")
+                        {
+                            adult = true;
+                        }
+                        else
+                        {
+                            adult = false;
+                        }
 
                     }
-                }
+
             }
-            return false;
+
+             if(adult == true)
+                {
+                    if(counter < 6)
+                        {
+                            return true;
+                        }
+                        else
+                        {
+                            std::cout << "Check Out Limit Reached, press enter to continue" << endl;
+                            cin.ignore();
+                            return false;
+                        }
+                }
+            else if(adult == false && atype =="CB")
+                {
+                    if(counter < 3)
+                        {
+                            return true;
+                        }
+                        else
+                        {
+                            std::cout << "Check Out Limit Reached, press enter to continue" << endl;
+                            cin.ignore();
+                            return false;
+                        }
+                }
+                else if(adult == false && atype == "AB")
+                {
+                   std::cout << "Can't check out an adult media, press enter to continue" << endl;
+                   cin.ignore();
+                   return false;
+                }
+                else
+                {
+                  return false;
+                }
         }
         //user checks in book
         //calls menu of books user checked out
@@ -93,6 +103,7 @@ class UserInterface
              //a choice for the user to select which book/media to check in.
              //updates the book list to include the book to show that its available.
              string choice;
+             bool check = false;
              string lib = "library";
              int currentCounter = 0;
 
@@ -125,33 +136,38 @@ class UserInterface
                 else if((choice == "N" || choice == "n") && currentCounter <= allBooks.size())
                 {
                     currentCounter += 10;
-
                 }
-
                 else
                 {
                     for(int i = 0; i < allBooks.size(); i++)
                     {
                         string title = allBooks[i]->getTitle();
                         string auser = allBooks[i]->getUser();
-
+                        string atype = allBooks[i]->getType();
                       string is;
-                    std::ostringstream convert;
+                      std::ostringstream convert;
                       convert << i;
                       is = convert.str();
                         if (choice == title)
                         {
                             //std::cout << userName << " successfully checked out " << title << endl;
+                           check = checkUser(atype);
+                            if(check == true)
+                                {
                             allBooks[i]->setUser(userName);
                             allBooks[i]->setDate(currentDate);
                             system("cls");
-
+                                }
                         }
                         if(choice == is && auser == lib)
                         {
+                           check = checkUser(atype);
+                             if(check == true)
+                                {
                            //std::cout << userName << " successfully checked out " << title << endl;
                             allBooks[i]->setUser(userName);
                             allBooks[i]->setDate(currentDate);
+                                }
                         }
                     }
                 }
@@ -178,7 +194,6 @@ class UserInterface
             //go through book list and display which books are available to check out
             //user gives choice to what book they want to use.
             //display in groups of 10?
-
             //create a user and temp books to hold the books for user to check out menu operations
             string user;
             string lib = "library";
@@ -187,7 +202,6 @@ class UserInterface
             string choice;
             if(allBooks.size() > 0)
             {
-
                 for(unsigned int i = 0; i < allBooks.size(); i++)
                 {
                     //check user has anything checked out at all
@@ -363,7 +377,7 @@ class UserInterface
 			    cout << "the user input is " << userName << endl;
 			    //determines if the user is actually in the list
 			    for(int i = 0; i < users.size(); i++){
-    				//cout << "from users " << users[i][0] << endl;
+    				cout << "from users " << users[i][0] << endl;
     				if(userName == users[i][0]){
 					    inList = true;
 				    }
@@ -385,8 +399,8 @@ class UserInterface
             std::cout << "\\*------------------*/" << endl;
             std::cout << "\nTo Check In enter 1"<< endl;
             std::cout << "To Check Out enter 2" << endl;
-            std::cout << "To View All books 3" << endl;
-            std::cout << "To View Over Due books 4" << endl;
+            std::cout << "To View All Media 3" << endl;
+            std::cout << "To View Over Due Media 4" << endl;
             std::cout << "To Advance Date enter 5" << endl;
             std::cout << "To Exit enter *" << endl;
             std::cout << "\n\\*------------------*/" << endl;
@@ -431,7 +445,6 @@ class UserInterface
            else
            {
               system("cls");
-              bool check = checkUser();
                 DisplayMenu();
            }
 
@@ -444,7 +457,6 @@ class UserInterface
             //adding a username variable for now to pass to other objects..
             //unless main handles this..
             std::string userName;
-            bool adult;
             //simple placeholders for now
             std::vector<Book*> allBooks; //all media
             vector<vector<string> > userList;
