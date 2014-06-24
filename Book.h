@@ -104,6 +104,11 @@ class Book
 		{
 			return user;
 		}
+		
+		Date getCheckedOut()
+		{
+			return checkedOut;
+		}
 
 		void setUser(string aUser)
 		{
