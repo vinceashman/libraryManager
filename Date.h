@@ -35,7 +35,7 @@ class Date
 					day++;
 				}
 			}
-			if (month+1 == 4 || month+1 == 6 || month+1 == 9 || month+1 == 11)
+			else if (month+1 == 4 || month+1 == 6 || month+1 == 9 || month+1 == 11)
 			{
 				if (day == 30)
 				{
