@@ -17,15 +17,9 @@ class UserInterface
          {
             allBooks = books;
             currentDate = theDate;
-<<<<<<< HEAD
-            currentDate.setMonth(6);
-            currentDate.setDay(27);
-            currentDate.setYear(2014);
-=======
             //currentDate.setMonth(8);
             //currentDate.setDay(2);
             //currentDate.setYear(2014);
->>>>>>> master
          }
         virtual ~UserInterface() {}
 
@@ -57,11 +51,7 @@ class UserInterface
             {
                 std::cout <<"\nEnter N for next page " ;
             }
-<<<<<<< HEAD
-                std::cout <<"\nEnter book name to check out:";
-=======
                 std::cout <<"\nEnter book name or number to check out:";
->>>>>>> master
                 std::cout <<"\nEnter * to return to menu" ;
 
 
@@ -82,15 +72,6 @@ class UserInterface
                     for(int i = 0; i < allBooks.size(); i++)
                     {
                         string title = allBooks[i]->getTitle();
-<<<<<<< HEAD
-                        if (choice == title)
-                        {
-                            std::cout << userName << " successfully checked out " << title << endl;
-                            allBooks[i]->setUser(userName);
-                            allBooks[i]->setDate(currentDate);
-                            system("cls");
-                            CheckOut();
-=======
                         string auser = allBooks[i]->getUser();
 
                       string is;
@@ -110,7 +91,6 @@ class UserInterface
                            //std::cout << userName << " successfully checked out " << title << endl;
                             allBooks[i]->setUser(userName);
                             allBooks[i]->setDate(currentDate);
->>>>>>> master
                         }
                     }
                 }
@@ -167,11 +147,7 @@ class UserInterface
             std::cout <<"|------------------------------------------|" << endl;
             std::cout <<"Select a item to check out:" << endl;
             //oice = promptForInput();//need to figure out how to get matching data from list
-<<<<<<< HEAD
-            std::cout <<"\nEnter book name to check out:";
-=======
             std::cout <<"\nEnter book name or number to check out:";
->>>>>>> master
             std::cout <<"\nEnter * to return to menu" ;
 
 
@@ -185,12 +161,6 @@ class UserInterface
                 else
                 {
                      string title;
-<<<<<<< HEAD
-                    for(int i = 0; i < allBooks.size(); i++)
-                    {
-                      title = allBooks[i]->getTitle();
-                        if (choice == title)
-=======
                      string auser;
                     for(int i = 0; i < allBooks.size(); i++)
                     {
@@ -202,19 +172,15 @@ class UserInterface
                       convert << i;
                       is = convert.str();
                         if(choice == title)
->>>>>>> master
                         {
                             std::cout << userName << " successfully checked out " << title << endl;
                             allBooks[i]->setUser(lib);
                         }
-<<<<<<< HEAD
-=======
                         if(choice == is && auser == userName)
                         {
                            std::cout << userName << " successfully checked out " << title << endl;
                             allBooks[i]->setUser(lib);
                         }
->>>>>>> master
 
                     }
 
@@ -282,18 +248,8 @@ class UserInterface
 
                 }
                 else if (choice == "*")
-<<<<<<< HEAD
                 {
                     //std::cout << "\Incorrect entry enter again:";
-                }
-                else
-                {
-
-
-=======
-                {
-                    //std::cout << "\Incorrect entry enter again:";
->>>>>>> master
                 }
 
              }
