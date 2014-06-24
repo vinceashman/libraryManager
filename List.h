@@ -10,34 +10,38 @@ class List
 {
 
 public:
-	List(void);
-	void ListAvailable(vector<Book*> books, int currentBook);
-	void AllBooks(vector<Book*> books, int currentBook);
-	void ListOverdue(vector<Book*> books, int currentBook, Date currentDate);
-	void BooksCheckedOut(vector<Book*> books, string user);
-};
-List::List()
-{}
+	List(void){}
 
-void List::ListAvailable(vector<Book*> books, int currentBook)
+
+//List::List()
+//{
+
+//}
+void ListAvailable(vector<Book*> books, int currentBook)
 {
 	int startingBook = currentBook;
 	string user, title;
 
-	//Prints the next 10 books or the previous 10 books 
+	//Prints the next 10 books or the previous 10 books
 	//depending on the currentBook parameter passed.
 	for(currentBook; currentBook < (startingBook + 10); currentBook++)
 	{
+	    if(currentBook < books.size())
+        {
+
+
 		user = books[currentBook]->getUser();
 		if(currentBook < books.size() && user == "library") //currentBook can never be bigger than the index of the last element in the vector
 		{
 			title = books[currentBook]->getTitle();
 			cout << currentBook << ". " << title << endl;
 		}
+        }
 	}
+
 }
 
-void List::AllBooks(vector<Book*> books, int currentBook)
+void AllBooks(vector<Book*> books, int currentBook)
 {
 	int startingBook = currentBook;
 	string title, user;
@@ -55,11 +59,11 @@ void List::AllBooks(vector<Book*> books, int currentBook)
 			else
 				cout << "check out." << endl;
 		}
-		
+
 	}
 }
 
-void List::BooksCheckedOut(vector<Book*> books, string user)
+void BooksCheckedOut(vector<Book*> books, string user)
 {
 	string currentName, title;
 
@@ -74,7 +78,7 @@ void List::BooksCheckedOut(vector<Book*> books, string user)
 	}
 }
 
-void List::ListOverdue(vector<Book*> books, int currentBook, Date currentDate)
+void ListOverdue(vector<Book*> books, int currentBook, Date currentDate)
 {
 	int startingBook = currentBook;
 	string user, title;
@@ -88,6 +92,30 @@ void List::ListOverdue(vector<Book*> books, int currentBook, Date currentDate)
 	
 	for(currentBook; currentBook < (startingBook + 10); currentBook++)
 	{
+<<<<<<< HEAD
+	    if(currentBook < books.size())
+        {
+
+
+		user = books[currentBook]->getUser();
+
+		if(user == "library"){}
+
+		else
+		{
+			dueDate = books[currentBook]->CalcDueDate();
+			dueDay = dueDate.getDay();
+			dueMonth = dueDate.getMonth();
+			dueYear = dueDate.getYear();
+
+			if(todayYear > dueYear )
+			{
+				title = books[currentBook]->getTitle();
+				cout << user << " currently has " << title << "." << "It was due on: "<<dueDay<<"/"<<dueMonth<<"/"<<dueYear<<"."<<endl;
+			}
+
+			else if(todayMonth > dueMonth)
+=======
 		if(currentBook < books.size())
 		{		
 			user = books[currentBook]->getUser();
@@ -95,6 +123,7 @@ void List::ListOverdue(vector<Book*> books, int currentBook, Date currentDate)
 			if(user == "library"){}
 	
 			else
+>>>>>>> master
 			{
 				dueDate = books[currentBook]->CalcDueDate();
 				dueDay = dueDate.getDay();
@@ -120,6 +149,20 @@ void List::ListOverdue(vector<Book*> books, int currentBook, Date currentDate)
 				}
 			}
 
+<<<<<<< HEAD
+			else if(todayDay > dueDay)
+			{
+				title = books[currentBook]->getTitle();
+				cout << user << " currently has " << title << "." << "It was due on: "<<dueDay<<"/"<<dueMonth<<"/"<<dueYear<<"."<<endl;
+			}
+
 		}
+
+        }
+=======
+		}
+>>>>>>> master
 	}
 }
+
+};

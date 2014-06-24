@@ -5,6 +5,7 @@
 #include <string>
 #include <fstream>
 #include <iostream>
+#include <sstream>
 #include <vector>
 #include "Book.h"
 #include "Date.h"
@@ -21,6 +22,20 @@ using namespace std;
 int main(){
 	//declaration of variables
 	//the vectors for the lists of books and users respectively
+<<<<<<< HEAD
+	vector<Book*> books;
+
+	//vector<User*> users;
+
+	//our file handler objects. the text files are going to be hard coded.
+	ifstream bookFile;
+	//youll want to inplement some error checking here.
+	// userFile.open("userlist.txt");
+	//bookFile.open("booklist.txt");
+	try
+	{
+		bookFile.open("booklist.txt");
+=======
 	cout <<"before book vector creation"<<endl;
 	vector<Book*> books;
 	cout <<"after book vector creation"<<endl;
@@ -50,17 +65,49 @@ int main(){
 	//reading in the userfile 
 	try{
 		userFile.open("userlist.txt");
+>>>>>>> master
 	}
     catch (int e)
 	{
+<<<<<<< HEAD
+		cout << "Could not open book file.\n";
+		return 0;
+	}
+
+	Date theDate;
+
+	//instantiate ui object. most likely it would take 3 parameters. a pointer to the 2 vectors and a pointer to the date object.
+
+=======
 		cout << "Could not open user file.\n";
 	}
 	
 	
+>>>>>>> master
 
 	//read in the data from the booklist.txt file
 	cout<<"populating books"<<endl;
 	while(!bookFile.eof()){
+<<<<<<< HEAD
+        string aLine;
+		getline(bookFile, aLine);
+        if(!aLine.empty() )
+        {
+
+			istringstream iss(aLine);
+			string title, type, dateCheckedOut, user;
+			iss >> title;
+			// cout << title << " is the Title " << endl;
+			iss >> type;
+			// cout << type << " is the Type " << endl;
+			iss >> dateCheckedOut;
+			// cout << dateCheckedOut << " is the date " << endl;
+			iss >> user;
+			// cout << user << " is the user " << endl;
+			books.push_back(new Book(title, type, dateCheckedOut, user));
+
+        }
+=======
         cout<<"in while loop!"<<endl;
         //string aLine;
         //getline(bookFile, aLine);
@@ -73,11 +120,18 @@ int main(){
 		bookFile >> user;
 		books.push_back(new Book(title, type, dateCheckedOut, user));
         //}
+>>>>>>> master
 
 	}
 	cout <<"books are done populating" <<endl;
 
 	//read in userlist.txt
+<<<<<<< HEAD
+
+
+
+    UserInterface ui(books, theDate);
+=======
 	cout << "Populating userlist" << endl;
 	while(!userFile.eof()){
 		//string aLine;
@@ -97,10 +151,24 @@ int main(){
 	//instantiate UI object. 
     UserInterface ui(books, theDate);
 
+>>>>>>> master
 	//main process control loop
 	do{
 		//main program body here
 		ui.DisplayLoginMenu();
+<<<<<<< HEAD
+		//ui.promptForInput();
+
+	}while(!ui.exit());
+
+	//write the user vector to the file
+
+	//write the book vector to the file
+
+	//print exit message and do any necessary cleanup
+	cout << "\nThank you for using the library of Valhalla" << endl;
+    system("pause");
+=======
 	}while(!ui.exit());
 	
 	userFile.close();
@@ -130,5 +198,6 @@ int main(){
 	cout << "\nThank you for using the library of Valhalla" << endl;
 	
 	
+>>>>>>> master
 	return 0;
 }
