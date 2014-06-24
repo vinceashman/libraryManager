@@ -35,7 +35,6 @@ class UserInterface
                             if(userName == aUser)
                             {
                                 counter++;
-
                             }
 
                         }
@@ -89,8 +88,10 @@ class UserInterface
                    cin.ignore();
                    return false;
                 }
-                else
+                else if(adult == false && atype =="DVD" || atype =="VHS")
                 {
+                   std::cout << "Only adults can check out DVD's and VHS tapes, press enter to continue" << endl;
+                   cin.ignore();
                   return false;
                 }
         }
@@ -182,7 +183,7 @@ class UserInterface
         string promptForInput()
         {
                string theInput = "";
-               std::cout << "\nEnter selection: ";
+               std::cout << "\nEnter: ";
                std::getline(std::cin,theInput);
                return theInput;
         }
@@ -242,8 +243,8 @@ class UserInterface
                       title = allBooks[i]->getTitle();
                       auser = allBooks[i]->getUser();
                         Date resetDate;
-                        resetDate.setDay(0);
-                        resetDate.setMonth(0);
+                        resetDate.setDay(00);
+                        resetDate.setMonth(00);
                         resetDate.setYear(0000);
                       string is;
                     std::ostringstream convert;
