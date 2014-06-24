@@ -5,6 +5,7 @@
 #include "Date.h"
 #include <vector>
 #include <string>
+#include <sstream>
 //#include "List.h"
 
 using namespace std;
@@ -16,9 +17,15 @@ class UserInterface
          {
             allBooks = books;
             currentDate = theDate;
+<<<<<<< HEAD
             currentDate.setMonth(6);
             currentDate.setDay(27);
             currentDate.setYear(2014);
+=======
+            //currentDate.setMonth(8);
+            //currentDate.setDay(2);
+            //currentDate.setYear(2014);
+>>>>>>> master
          }
         virtual ~UserInterface() {}
 
@@ -31,6 +38,7 @@ class UserInterface
              //a choice for the user to select which book/media to check in.
              //updates the book list to include the book to show that its available.
              string choice;
+             string lib = "library";
              int currentCounter = 0;
 
              do
@@ -49,7 +57,11 @@ class UserInterface
             {
                 std::cout <<"\nEnter N for next page " ;
             }
+<<<<<<< HEAD
                 std::cout <<"\nEnter book name to check out:";
+=======
+                std::cout <<"\nEnter book name or number to check out:";
+>>>>>>> master
                 std::cout <<"\nEnter * to return to menu" ;
 
 
@@ -70,6 +82,7 @@ class UserInterface
                     for(int i = 0; i < allBooks.size(); i++)
                     {
                         string title = allBooks[i]->getTitle();
+<<<<<<< HEAD
                         if (choice == title)
                         {
                             std::cout << userName << " successfully checked out " << title << endl;
@@ -77,6 +90,27 @@ class UserInterface
                             allBooks[i]->setDate(currentDate);
                             system("cls");
                             CheckOut();
+=======
+                        string auser = allBooks[i]->getUser();
+
+                      string is;
+                    std::ostringstream convert;
+                      convert << i;
+                      is = convert.str();
+                        if (choice == title)
+                        {
+                            //std::cout << userName << " successfully checked out " << title << endl;
+                            allBooks[i]->setUser(userName);
+                            allBooks[i]->setDate(currentDate);
+                            system("cls");
+
+                        }
+                        if(choice == is && auser == lib)
+                        {
+                           //std::cout << userName << " successfully checked out " << title << endl;
+                            allBooks[i]->setUser(userName);
+                            allBooks[i]->setDate(currentDate);
+>>>>>>> master
                         }
                     }
                 }
@@ -95,6 +129,9 @@ class UserInterface
                std::getline(std::cin,theInput);
                return theInput;
         }
+
+        //Check if user has any books checked out at all. If the user has a checked out book call the list bookscheckedout function
+        //prompt a menu for user to select what to check in
         void CheckIn()
                  {
             //go through book list and display which books are available to check out
@@ -130,7 +167,11 @@ class UserInterface
             std::cout <<"|------------------------------------------|" << endl;
             std::cout <<"Select a item to check out:" << endl;
             //oice = promptForInput();//need to figure out how to get matching data from list
+<<<<<<< HEAD
             std::cout <<"\nEnter book name to check out:";
+=======
+            std::cout <<"\nEnter book name or number to check out:";
+>>>>>>> master
             std::cout <<"\nEnter * to return to menu" ;
 
 
@@ -144,14 +185,36 @@ class UserInterface
                 else
                 {
                      string title;
+<<<<<<< HEAD
                     for(int i = 0; i < allBooks.size(); i++)
                     {
                       title = allBooks[i]->getTitle();
                         if (choice == title)
+=======
+                     string auser;
+                    for(int i = 0; i < allBooks.size(); i++)
+                    {
+                      title = allBooks[i]->getTitle();
+                      auser = allBooks[i]->getUser();
+
+                      string is;
+                    std::ostringstream convert;
+                      convert << i;
+                      is = convert.str();
+                        if(choice == title)
+>>>>>>> master
                         {
                             std::cout << userName << " successfully checked out " << title << endl;
                             allBooks[i]->setUser(lib);
                         }
+<<<<<<< HEAD
+=======
+                        if(choice == is && auser == userName)
+                        {
+                           std::cout << userName << " successfully checked out " << title << endl;
+                            allBooks[i]->setUser(lib);
+                        }
+>>>>>>> master
 
                     }
 
@@ -181,6 +244,8 @@ class UserInterface
               system("cls");
               DisplayMenu();
          }
+
+         //calls the list AllBooks function that displays all media in the library in sets of 10
         void viewAllBooks()
         {
 
@@ -217,6 +282,7 @@ class UserInterface
 
                 }
                 else if (choice == "*")
+<<<<<<< HEAD
                 {
                     //std::cout << "\Incorrect entry enter again:";
                 }
@@ -224,6 +290,10 @@ class UserInterface
                 {
 
 
+=======
+                {
+                    //std::cout << "\Incorrect entry enter again:";
+>>>>>>> master
                 }
 
              }
@@ -231,6 +301,8 @@ class UserInterface
              system("cls");
             DisplayMenu();
         }
+
+        //call the list ListOverdue function that will display all lover due media in the library
         void viewOverDueBooks()
         {
 
@@ -258,7 +330,11 @@ class UserInterface
          //login menu call?
         void DisplayLoginMenu()
         {
+        std::cout << "|--------Library--------|" << endl;
         std::cout << "User Login:" << endl;
+        //check if user is existing or new
+        //check age associated with user
+        //ask for age for new users and automatically assign child/adult status
         userName = promptForInput();
         //got the login name, pass the information for the list
          system("cls");

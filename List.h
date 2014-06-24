@@ -89,8 +89,10 @@ void ListOverdue(vector<Book*> books, int currentBook, Date currentDate)
 	todayMonth = currentDate.getMonth();
 	todayYear = currentDate.getYear();
 
+	
 	for(currentBook; currentBook < (startingBook + 10); currentBook++)
 	{
+<<<<<<< HEAD
 	    if(currentBook < books.size())
         {
 
@@ -113,11 +115,41 @@ void ListOverdue(vector<Book*> books, int currentBook, Date currentDate)
 			}
 
 			else if(todayMonth > dueMonth)
+=======
+		if(currentBook < books.size())
+		{		
+			user = books[currentBook]->getUser();
+	
+			if(user == "library"){}
+	
+			else
+>>>>>>> master
 			{
-				title = books[currentBook]->getTitle();
-				cout << user << " currently has " << title << "." << "It was due on: "<<dueDay<<"/"<<dueMonth<<"/"<<dueYear<<"."<<endl;
+				dueDate = books[currentBook]->CalcDueDate();
+				dueDay = dueDate.getDay();
+				dueMonth = dueDate.getMonth();
+				dueYear = dueDate.getYear();
+	
+				if(todayYear > dueYear)
+				{
+					title = books[currentBook]->getTitle();
+					cout << user << " currently has " << title << "." << "It was due on: "<<dueDay<<"/"<<dueMonth<<"/"<<dueYear<<"."<<endl;
+				}
+	
+				else if(todayYear == dueYear && todayMonth > dueMonth)
+				{
+					title = books[currentBook]->getTitle();
+					cout << user << " currently has " << title << "." << "It was due on: "<<dueDay<<"/"<<dueMonth<<"/"<<dueYear<<"."<<endl;
+				}
+	
+				else if(todayYear == dueYear && todayMonth == dueMonth && todayDay > dueDay)
+				{
+					title = books[currentBook]->getTitle();
+					cout << user << " currently has " << title << "." << "It was due on: "<<dueDay<<"/"<<dueMonth<<"/"<<dueYear<<"."<<endl;
+				}
 			}
 
+<<<<<<< HEAD
 			else if(todayDay > dueDay)
 			{
 				title = books[currentBook]->getTitle();
@@ -127,6 +159,9 @@ void ListOverdue(vector<Book*> books, int currentBook, Date currentDate)
 		}
 
         }
+=======
+		}
+>>>>>>> master
 	}
 }
 
