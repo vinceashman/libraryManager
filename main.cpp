@@ -114,8 +114,28 @@ int main(){
 
 	//write the book vector to the file
 	for(int i = 0; i < books.size(); i++){
-		Date tempDate = books[i]->CalcDueDate();
-		outBook << books[i]->getTitle() << " " << books[i]->getType() << " " << tempDate.getMonth() << tempDate.getDay() << tempDate.getYear() << " " << books[i]->getUser() << endl;
+		if(books[i]->getUser() == "library")
+			outBook << books[i]->getTitle() << " " << books[i]->getType() << " " << "00" << "00" << "0000" << " library" << endl;
+		else{
+			Date tempDate = books[i]->getCheckedOut();
+
+			int checkedMonth, checkedDay, checkedYear;
+			checkedMonth = tempDate.getMonth();
+			checkedDay = tempDate.getDay();
+			checkedYear = tempDate.getYear();
+
+			outBook << books[i]->getTitle() << " " << books[i]->getType() << " ";
+			outBook.fill('0');
+			outBook.width( 2 );
+			outBook << tempDate.getMonth();
+			outBook.fill('0');
+			outBook.width( 2 );
+			outBook	<< tempDate.getDay();
+			outBook.fill('0');
+			outBook.width( 4 );
+			outBook << tempDate.getYear(); 
+			outBook << " " << books[i]->getUser() << endl;
+		}	
 	}
 
 	outUser.close();
