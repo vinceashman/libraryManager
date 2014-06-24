@@ -29,8 +29,8 @@ int main(){
 	//our file handler objects. the text files are going to be hard coded.
 	ifstream bookFile, userFile;
 	ofstream outBook, outUser;
-	
-	
+
+
 	try
 	{
 		bookFile.open("booklist.txt");
@@ -48,7 +48,7 @@ int main(){
 	{
 		cout << "Could not open user file.\n";
 	}
-	
+
 	Date theDate;
 
 	//read in the data from the booklist.txt file
@@ -73,10 +73,10 @@ int main(){
         }
 
 	}
-	cout <<"books are done populating" <<endl;
+	//cout <<"books are done populating" <<endl;
 
 	//populate the user vector
-	cout << "Populating userlist" << endl;
+	//cout << "Populating userlist" << endl;
 	while(!userFile.eof()){
 		string name, type;
 		userFile >> name;
@@ -88,8 +88,8 @@ int main(){
 		users.push_back(tempVect);
 		//}//end if
 	}//end while
-	
-    UserInterface ui(books, theDate);
+
+    UserInterface ui(books, theDate,users);
 	//main process control loop
 	do{
 		//main program body here
@@ -101,26 +101,26 @@ int main(){
 	//close the book files
 	userFile.close();
 	bookFile.close();
-	
-	
+
+
 	//opens the files to write to them.
 	outUser.open("userList.txt", std::ofstream::trunc);
 	outBook.open("bookList.txt", std::ofstream::trunc);
-	
+
 	//write the user vector to the file
 	for(int i = 0; i < users.size(); i++){
 		outUser << users[i][0] << " " << users[i][1] << endl;
 	}
-	
+
 	//write the book vector to the file
 	for(int i = 0; i < books.size(); i++){
 		Date tempDate = books[i]->CalcDueDate();
 		outBook << books[i]->getTitle() << " " << books[i]->getType() << " " << tempDate.getMonth() << tempDate.getDay() << tempDate.getYear() << " " << books[i]->getUser() << endl;
 	}
-	
+
 	outUser.close();
 	outBook.close();
-	
+
 	//print exit message and do any necessary cleanup
 	cout << "\nThank you for using the library of Valhalla" << endl;
     system("pause");
