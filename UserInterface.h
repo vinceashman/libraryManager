@@ -283,16 +283,29 @@ class UserInterface
            viewOverDueBooks();
             }
         }
-         //login menu call?
-        void DisplayLoginMenu()
-        {
-        std::cout << "|--------Library--------|" << endl;
-        std::cout << "User Login:" << endl;
-        //check if user is existing or new
-        //check age associated with user
-        //ask for age for new users and automatically assign child/adult status
-        userName = promptForInput();
-        //got the login name, pass the information for the list
+
+
+//this needs to be able to handle getting a vector of vectors of strings. 
+        void DisplayLoginMenu(vector<vector<string> > users)
+            {
+            std::cout << "|--------Library--------|" << endl;
+            std::cout << "User Login:" << endl;
+            //check if user is existing or new
+            //check age associated with user
+            //ask for age for new users and automatically assign child/adult status
+		    bool inList = false;
+		    while(!inList){
+			    userName = promptForInput();
+			    //determines if the user is actually in the list
+			    for(int i = 0; i < users.size(); i++){
+    				if(userName == users[i][0]){
+					    inList == true;
+				    }
+			    }
+			    std::cout << "Please enter a valid user name << endl;
+			    
+		}
+		//got the login name, pass the information for the list
          system("cls");
         DisplayMenu();
         }
