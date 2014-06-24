@@ -25,7 +25,7 @@ int main(){
 	vector<Book*> books;
 	cout <<"after book vector creation"<<endl;
 	//vector of users;
-	vector<vector<string>> users;
+	vector<vector<string> > users;
 	//our file handler objects. the text files are going to be hard coded.
 	ifstream bookFile, userFile;
 	
