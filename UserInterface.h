@@ -130,7 +130,7 @@ class UserInterface
                 choice = promptForInput();
                 if ((choice == "p" || choice == "P" )&& currentCounter > 0)
                 {
-                    currentCounter = 0;
+                    currentCounter -= 10;
 
                 }
                 else if((choice == "N" || choice == "n") && currentCounter <= allBooks.size())
@@ -319,7 +319,7 @@ class UserInterface
                 choice = promptForInput();
                 if ((choice == "p" || choice == "P" )&& currentCounter > 0)
                 {
-                    currentCounter = 0;
+                    currentCounter -= 10;
 
                 }
                 else if((choice == "N" || choice == "n") && currentCounter <= allBooks.size())
